@@ -1,3 +1,5 @@
+{{loginForm.value | json}}<br>
+{{loginForm.invalid | json}}
 <main class="d-flex w-100">
   <div class="container d-flex flex-column">
     <div class="row vh-100">
@@ -18,20 +20,30 @@
                   <div class="form-group mb-3">
                     <label class="form-label" for="email">Email</label>
                     <!-- <input class="form-control form-control-lg" type="text" placeholder="Enter your email" formControlName="email" name="email" [ngClass]="{'is-invalid':submitted && loginForm.controls.email.errors}" /> -->
-                    <input class="form-control" type="text" placeholder="Enter your email" name="email" formControlName="email" [ngClass]="{'is-invalid':submitted}" />
+                    <input class="form-control" type="text" placeholder="Enter your email" 
+                      formControlName="email" [ngClass]="loginForm.get('email')?.errors ? 'is-invalid' : '' " maxlength="50" [disabled]="isProcess" />
+                    <div class="invalid-feedback">
+                      กรุณากรอกข้อมูล
+                    </div>
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input formControlName="password" [ngClass]="{'is-invalid':submitted}" class="form-control" type="password" name="password" placeholder="Enter your password" id="password"  />
+                    <input formControlName="password" class="form-control" type="password" placeholder="Enter your password"
+                      [ngClass]="loginForm.get('password')?.errors ? 'is-invalid' : '' " maxlength="50" [disabled]="isProcess"/>
+                    <div class="invalid-feedback">
+                      กรุณากรอกข้อมูล999
+                    </div>
                   </div>
                   <div>
                     <div class="form-check align-items-center">
-                      <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
+                      <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me"
+                        name="remember-me" checked>
                       <label class="form-check-label text-small" for="customControlInline">Remember me</label>
                     </div>
                   </div>
                   <div class="d-grid gap-2 mt-3">
-                    <button type="submit" class="btn btn-lg btn-primary" value="Login" name=""><fa-icon [icon]="['fas', 'key']"></fa-icon> Sign in </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid"><fa-icon
+                        [icon]="['fas', 'key']"></fa-icon> Sign in </button>
                   </div>
                 </form>
               </div>

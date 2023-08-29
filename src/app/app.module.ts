@@ -27,7 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     
   ],
   providers: [],
