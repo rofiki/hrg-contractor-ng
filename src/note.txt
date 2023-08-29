@@ -1,0 +1,24 @@
+- work บันทึกงาน
+- cost บันทึกค่าใช้จ่าย
+- upload_picture อับโหลดรูปภาพ
+- receipt ออกใบเสร็จ
+- payment บันทึกหลักฐานรับเงินสด/เช็ค/โอนเข้าบัญชี
+
+อื่น ๆ
+- bank บัญชีธนาคาร
+- customer บริษัทผู้จ้าง
+- mycompany บริษัทตัวเอง
+
+users
+ - users_id
+ - users_code
+ - users_role
+    - admin
+    - user
+ - users_firstname
+ - users_lastname
+ - users_phone
+ - users_email
+ - users_password (md5)
+ - created
+ - updated
