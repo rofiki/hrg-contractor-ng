@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule) },
+  { path: 'setting', loadChildren: () => import('./modules//setting/setting.module').then((m) => m.SettingModule) },
   { path: '**', component: NotFoundComponent }
 ];
 
