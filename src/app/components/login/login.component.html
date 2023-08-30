@@ -1,9 +1,9 @@
-{{loginForm.value | json}}<br>
-{{loginForm.invalid | json}}
-<main class="d-flex w-100">
+<!-- {{loginForm.value | json}}<br>
+{{loginForm.invalid | json}} -->
+<main class="d-flex w-100 login-background" id="login-background">
   <div class="container d-flex flex-column">
     <div class="row vh-100">
-      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
+      <div class="col-sm-10 col-md-8 col-lg-6 col-xl-3 mx-auto d-table h-100">
         <div class="d-table-cell align-middle">
 
           <div class="text-center mt-4">
@@ -13,14 +13,14 @@
             </p>
           </div>
 
-          <div class="card">
+          <div class="card shadow" style="opacity: 0.7; ">
             <div class="card-body">
-              <div class="m-sm-3">
+              <div class="m-sm-1">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-group mb-3">
                     <label class="form-label" for="email">Email</label>
                     <!-- <input class="form-control form-control-lg" type="text" placeholder="Enter your email" formControlName="email" name="email" [ngClass]="{'is-invalid':submitted && loginForm.controls.email.errors}" /> -->
-                    <input class="form-control" type="text" placeholder="Enter your email" 
+                    <input class="form-control form-control-sm" type="text" placeholder="Enter your email" 
                       formControlName="email" [ngClass]="loginForm.get('email')?.errors ? 'is-invalid' : '' " maxlength="50" [disabled]="isProcess" />
                     <div class="invalid-feedback">
                       กรุณากรอกข้อมูล
@@ -28,7 +28,7 @@
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input formControlName="password" class="form-control" type="password" placeholder="Enter your password"
+                    <input formControlName="password" class="form-control form-control-sm" type="password" placeholder="Enter your password"
                       [ngClass]="loginForm.get('password')?.errors ? 'is-invalid' : '' " maxlength="50" [disabled]="isProcess"/>
                     <div class="invalid-feedback">
                       กรุณากรอกข้อมูล999

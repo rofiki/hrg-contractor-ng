@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { FooterComponent } from './layout/footer/footer.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    BsDropdownModule.forRoot(),
+
   ],
   exports:[
     HeaderComponent,
