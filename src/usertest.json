@@ -1,0 +1,17 @@
+{
+    "users":[
+        {
+            "users_id": "1",
+            "users_code": "TRO1081",
+            "users_role": "admin",
+            "users_firstname": "Rofiki",
+            "users_lastname": "Harong",
+            "users_phone": "0818980428",
+            "users_email": "vidocq.hrg@gmail.com",
+            "users_password": "1081",
+            "isactive": true,
+            "created": "0000-00-00",
+            "updated": "0000-00-00"
+        }
+    ]
+}

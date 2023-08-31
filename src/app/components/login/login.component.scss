@@ -1,4 +1,15 @@
 .login-background{
 	background-image: url('/assets/img.jpg');
+	// background-image: url('/assets/2261382.jpg');
 	background-size: cover;
+}
+
+.message-error {
+	font-size: 12px;
+	color:red;
+}
+
+.message-success {
+	font-size: 12px;
+	color: green;
 }
