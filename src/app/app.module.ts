@@ -17,6 +17,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr'; 
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HttpClientModule,
     ReactiveFormsModule,
     
+    ToastrModule.forRoot(),
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     FontAwesomeModule,

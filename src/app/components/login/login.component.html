@@ -8,7 +8,7 @@
             <p class="lead">
               <img src="/assets/fildan_firhan.png" alt="..." height="200">
             </p>
-            
+
           </div>
 
           <div class="card shadow" style="opacity: 0.7; ">
@@ -17,20 +17,21 @@
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-group mb-3">
                     <label class="form-label" for="email">Email</label>
-                    <input class="form-control form-control-sm" type="text" placeholder="Enter your email" 
-                      formControlName="email"  maxlength="50" 
-                      [disabled]="isProcess" required />
-                    <div *ngIf="(loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched))">
-                       <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
+                    <input class="form-control form-control-sm" type="text" placeholder="Enter your email"
+                      formControlName="email" maxlength="50" />
+                    <div
+                      *ngIf="(loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched))">
+                      <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
                     </div>
                   </div>
                   <div class="form-group mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input formControlName="password" class="form-control form-control-sm" type="password" placeholder="Enter your password"
-                       maxlength="50" [disabled]="isProcess" />
-                       <div *ngIf="(loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched))">
-                        <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
-                      </div>
+                    <input formControlName="password" class="form-control form-control-sm" type="password"
+                      placeholder="Enter your password" maxlength="50" />
+                    <div
+                      *ngIf="(loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched))">
+                      <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
+                    </div>
                   </div>
                   <div>
                     <div class="form-check align-items-center">
@@ -40,8 +41,8 @@
                     </div>
                   </div>
                   <div class="d-grid gap-2 mt-3">
-                    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid"><fa-icon
-                        [icon]="['fas', 'key']"></fa-icon> Sign in </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid"><i
+                        class="fa-solid fa-key"></i> Sign in </button>
                   </div>
                 </form>
               </div>
