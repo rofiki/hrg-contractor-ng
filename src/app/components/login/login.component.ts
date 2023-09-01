@@ -20,8 +20,19 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private authService: AuthService) {
-      sessionStorage.clear();
-     }
+    //sessionStorage.clear();
+
+    if (sessionStorage.getItem('usersrole') != null) {
+      const role = sessionStorage.getItem('usersrole');
+      this.router.navigate([role]);
+    }
+
+    //  if(this.authService.GetRole() != null)
+    //  {
+    //    this.router.navigate(this.authService.GetRole());
+    //  }
+
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -44,15 +55,15 @@ export class LoginComponent implements OnInit {
 
           if (this.users.isactive) {
 
-            sessionStorage.setItem('usersname',this.users.users_email);
-            sessionStorage.setItem('usersid',this.users.id);
-            sessionStorage.setItem('usersrole',this.users.users_role);
+            sessionStorage.setItem('usersname', this.users.users_email);
+            sessionStorage.setItem('usersid', this.users.id);
+            sessionStorage.setItem('usersrole', this.users.users_role);
 
-            if(this.users.users_role == 'admin'){
+            if (this.users.users_role == 'admin') {
               this.router.navigate(['/admin']);
-            }else if(this.users.users_role == 'user'){
+            } else if (this.users.users_role == 'user') {
               this.router.navigate(['/user']);
-            }else{
+            } else {
 
             }
             this.toastr.success('อีเมล์ของคุณ: ' + this.loginForm.value.email, 'เข้าสู่ระบบสำเร็จ!!');

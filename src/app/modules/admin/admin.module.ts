@@ -7,6 +7,10 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { WorkComponent } from './components/work/work.component';
+import { CostComponent } from './components/cost/cost.component';
+import { ReceiptComponent } from './components/receipt/receipt.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 
 @NgModule({
@@ -15,6 +19,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FooterComponent,
 
     AdminDashboardComponent,
+    WorkComponent,
+    CostComponent,
+    ReceiptComponent,
+    PaymentComponent,
   ],
   imports: [
     CommonModule,

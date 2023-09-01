@@ -1,3 +1,85 @@
 <app-header></app-header>
-<p>testsetting works!</p>
- <app-footer></app-footer>
+
+<div class="container main-body">
+    <div class="h3">            
+        ตั้งค่า/รายงาน
+        <div class="text-muted h6 fw-normal">
+            <small>ตั้งค่าข้อมูลเกี่ยวกับระบบ / แสดงรายงาน</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-5 shadow">
+        <div class="row  pb-5 ">
+            <div class="col-md-6">
+                <p class="fw-bolder">ข้อมูลหลัก</p>
+                <div class="fs-6">
+                    <ul>
+                        <li>
+                            <a [routerLink]="['/setting/bookbank']" class="text-decoration-none">ข้อมูลบัญชีธนาคาร</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/setting/customer']" class="text-decoration-none">ข้อมูลบริษัทผู้จ้าง (ลูกค้า)</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/setting/mycompany']"  class="text-decoration-none">ข้อมูลบริษัทของคุณ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>    
+            <div class="col-md-6">
+                <p class="fw-bolder">กำหนดสิทธิ์
+                </p>
+                <div class="fs-6">
+                    <ul>
+                        <li>
+                            <a [routerLink]="['/setting/admin']" class="text-decoration-none">กำหนด ผู้ดูแล/ผู้พิจารณา/ผู้อนุมัติ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-5 shadow">
+        <div class="row  pb-5 ">
+            <div class="col-md-6">
+                <p class="fw-bolder">รายงาน</p>
+                <div class="fs-6">
+                    <ul>
+                        <li class="mb-2">
+                            <a [routerLink]="['/setting/report']" class="text-decoration-none">ประวัติการดำเนินงาน</a>
+                            <div class="small text-secondary">
+                                รายงานประวัติการเข้าดำเนินงานในแต่ละพื้นที่
+                            </div>
+                        </li> 
+                        <li class="mb-2">
+                            <a [routerLink]="['/setting/report']" class="text-decoration-none">ข้อมูลสถานะการดำเนินงาน</a>
+                            <div class="small text-secondary">
+                                รายงานสถานะการดำเนินงาน แบ่งตามประเภทสถานะ
+                            </div>
+                        </li>                       
+                        <li class="mb-2">
+                            <a [routerLink]="['/setting/report']" class="text-decoration-none">ข้อมูลรายรับ</a>
+                            <div class="small text-secondary">
+                                รายงานรายรับ แยกตาม วัน/เดือน/ปี
+                            </div>
+                        </li>  
+                        <li class="mb-2">
+                            <a [routerLink]="['/setting/report']" class="text-decoration-none">ข้อมูลรายจ่าย</a>
+                            <div class="small text-secondary">
+                                รายงานรายจ่าย แยกตาม วัน/เดือน/ปี และหมวดค่าใช้จ่าย
+                            </div>
+                        </li>  
+                        <li class="mb-2">
+                            <a [routerLink]="['/setting/report']" class="text-decoration-none">ข้อมูลลูกหนี้ค้างชำระ</a>
+                            <div class="small text-secondary">
+                                รายงานข้อมูลลูกหนี้ค้างชำระ
+                            </div>
+                        </li>                     
+                    </ul>
+                </div>
+            </div>    
+        </div>
+    </div>    
+    <div class="margin-footer"></div>
+</div>
+
+<app-footer></app-footer>

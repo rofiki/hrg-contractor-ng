@@ -10,14 +10,11 @@ import { Router } from '@angular/router';
 })
 
 export class HeaderComponent {
+
   modalRef?: BsModalRef;
+  public getRole = sessionStorage.getItem('usersrole');
 
   constructor(private modalService: BsModalService, private toastr: ToastrService, private router: Router) { }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-
-  }
 
   logout() {
     sessionStorage.clear();

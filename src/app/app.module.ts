@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { WorkComponent } from './modules/components/work/work.component';
 
 //ngx-bootstrap
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +25,6 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     ForgetPasswordComponent,
     NotFoundComponent,
-    WorkComponent,
 
   ],
   imports: [
