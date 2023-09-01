@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+      sessionStorage.clear();
+     }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -30,24 +32,29 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.loginForm.valid) {
-    //   console.log(this.loginForm.value.email);
-    //   this.toastr.success(this.loginForm.value.email + ' เข้าสู่ระบบ');
-    //   this.router.navigate(['admin']);
-    // } else {
-    //   console.log(this.loginForm.get('email')?.errors);
-
-    // }
 
     if (this.loginForm.valid) {
+
       this.authService.GetByCode(this.loginForm.value.email).subscribe(data => {
         this.users = data;
         this.users = (this.users.length > 0) ? this.users[0] : '';
-
-        console.log(this.users);
+        //console.log(this.users);
 
         if (this.users.users_password === this.loginForm.value.password) {
+
           if (this.users.isactive) {
+
+            sessionStorage.setItem('usersname',this.users.users_email);
+            sessionStorage.setItem('usersid',this.users.id);
+            sessionStorage.setItem('usersrole',this.users.users_role);
+
+            if(this.users.users_role == 'admin'){
+              this.router.navigate(['/admin']);
+            }else if(this.users.users_role == 'user'){
+              this.router.navigate(['/user']);
+            }else{
+
+            }
             this.toastr.success('อีเมล์ของคุณ: ' + this.loginForm.value.email, 'เข้าสู่ระบบสำเร็จ!!');
           } else {
             this.toastr.error('กรุณาติดต่อผู้ดูแลระบบ อีเมล์:vidocq.hrg@gmail.com', 'ผู้ใช้งานนี้ถูกระงับ');
