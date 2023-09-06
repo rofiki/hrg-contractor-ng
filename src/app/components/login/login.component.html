@@ -14,6 +14,7 @@
           <div class="card shadow" style="opacity: 0.7; ">
             <div class="card-body">
               <div class="m-sm-1">
+                <button (click)="regis()">เพิ่ม user</button>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-group mb-3">
                     <label class="form-label" for="email">Email</label>

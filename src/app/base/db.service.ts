@@ -8,7 +8,7 @@ export class DbService {
   constructor() { }
 
   public getServiceURL () : string {
-    return "http://localhost:8000";
+    return "http://localhost:8000/api";
   }
 
   public getJsonServerURL () : string {
