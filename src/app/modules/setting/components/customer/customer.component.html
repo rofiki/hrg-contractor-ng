@@ -2,14 +2,14 @@
 
 <div class="container main-body">
     <div class="h3">
-        ข้อมูลบริษัทผู้จ้าง (ลูกค้า)
+        บริษัทผู้จ้าง (ลูกค้า)
         <div class="text-muted h6 fw-normal">
             <small>ข้อมูลบริษัทผู้จ้าง (ลูกค้า)</small>
         </div>
     </div>
     <div class="bg-white border mt-4 p-4 shadow">
         <div class="row">
-            <div class="col-md-8 border-end">
+            <div class="col-md-12">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let item of customer">
+                        <ng-container *ngFor="let item of items">
                             <tr>
                                 <td class="fw-light">{{item.name}}</td>
                                 <td class="fw-light">{{item.address}} {{item.address2}}</td>
@@ -33,8 +33,9 @@
                         </ng-container>
                     </tbody>
                 </table>
+                <button class="btn btn-primary" [routerLink]="['/setting/customernew']">เพิ่มข้อมูล</button>
             </div>
-            <div class="col-md-4 ">ฟอร์มแก้ไข</div>
+
         </div>
 
 

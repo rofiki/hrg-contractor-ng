@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/login']);
           }
 
-          this.toastr.success('ชื่อของคุณคือ: ' + this.users.firstname + ' ' + this.users.lastname, 'เข้าสู่ระบบสำเร็จ!!');
+          this.toastr.success('ชื่อของคุณคือ: ' + this.users.ufirstname + ' ' + this.users.ulastname, 'เข้าสู่ระบบสำเร็จ!!');
         } else {
           this.toastr.error("อีเมล์หรือรหัสผ่านไม่ถูกต้อง");
         }

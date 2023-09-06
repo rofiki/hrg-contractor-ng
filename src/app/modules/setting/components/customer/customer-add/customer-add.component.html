@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        ข้อมูลบริษัทผู้จ้าง (ลูกค้า)
+        <div class="text-muted h6 fw-normal">
+            <small>ข้อมูลบริษัทผู้จ้าง (ลูกค้า)</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row">
+            <div class="col-md-8">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label m-0">ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="name">
+                        <div
+                        *ngIf="(createForm.get('name')?.invalid && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
+                        <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label m-0">ที่อยู่ <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label m-0">ที่อยู่ 2</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label m-0">เบอร์โทรศัพท์ <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label m-0">เลขที่ภาษีอากร</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <button type="submit" class="btn btn-primary me-1" [disabled]="createForm.invalid"> บันทึก </button>
+                    <button class="btn btn-secondary " [routerLink]="['/setting/customer']">กลับ</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -9,9 +9,13 @@ export class CustomerService {
 
   constructor(private http:HttpClient, private dbService: DbService) { }
 
-  private apiUrl: string = this.dbService.getServiceURL() + '/api/customer';
+  private apiUrl: string = this.dbService.getServiceURL() + '/customers';
 
-  listCustomer(){
+  get(){
+    return this.http.get<any>(this.apiUrl);
+  }
+
+  getById(id:any){
     return this.http.get<any>(this.apiUrl);
   }
 }
