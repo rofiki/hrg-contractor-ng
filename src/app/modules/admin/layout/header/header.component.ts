@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
   modalRef?: BsModalRef;
-  public getRole = sessionStorage.getItem('usersrole');
+  public getRole = localStorage.getItem('role');
 
   constructor(private modalService: BsModalService, private toastr: ToastrService, private router: Router) { }
 
   logout() {
-    sessionStorage.clear();
-    if (sessionStorage.getItem('usersrole') == null) {
+    localStorage.clear();
+    if (localStorage.getItem('role') == null) {
       this.toastr.error('', 'คุณได้ออกจากระบบแล้ว');
       this.router.navigate(['login']);
     }

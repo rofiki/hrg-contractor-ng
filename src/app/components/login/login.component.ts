@@ -21,20 +21,15 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private authService: AuthService,
-    private apiService:ApiService,
-    ) {
-    //sessionStorage.clear();
+    private apiService: ApiService,
+  ) {
 
-    if (sessionStorage.getItem('usersrole') != null) {
-      const role = sessionStorage.getItem('usersrole');
+    if (localStorage.getItem('role') != null) {
+      const role = localStorage.getItem('role');
       this.router.navigate([role]);
+    }else{
+      localStorage.clear();
     }
-
-    //  if(this.authService.GetRole() != null)
-    //  {
-    //    this.router.navigate(this.authService.GetRole());
-    //  }
-
   }
 
   ngOnInit() {
@@ -45,56 +40,50 @@ export class LoginComponent implements OnInit {
 
   }
   // add user เฉยๆ เดียวก็ลบ
-  regis(){
-    this.authService.regis1().subscribe(res => {console.log(res)})
+  // regis() {
+  //   this.authService.regis1().subscribe(res => { console.log(res) })
+  // }
+
+  logout() {
+    localStorage.clear();
+    if (localStorage.getItem('role') == null) {
+      this.toastr.error('', 'คุณได้ออกจากระบบแล้ว');
+      this.router.navigate(['login']);
+    }
   }
+
   onSubmit() {
 
     if (this.loginForm.valid) {
-      this.loginForm.value.password = this.authService.MD5(this.loginForm.value.password);
+
       this.authService.login(this.loginForm.value).subscribe(data => {
         this.users = data
-        console.log(this.users);
-        if(this.users.status){
+        // console.log(this.users);
+        if (this.users.status) {
 
-          // localStorage.setItem('firstname', this.users.firstname);
-          // localStorage.setItem('lastname', this.users.lastname);
-          // localStorage.setItem('email', this.users.email);
-          // localStorage.setItem('token', this.users.token);
+          localStorage.setItem('firstname', this.users.ufirstname);
+          localStorage.setItem('lastname', this.users.ulastname);
+          localStorage.setItem('email', this.users.uemail);
+          localStorage.setItem('token', this.users.token);
+          localStorage.setItem('logintime', this.users.logintime);
+          localStorage.setItem('role', this.users.role);
+
+          if (this.users.role == 'admin') {
+            this.router.navigate(['/admin']);
+          } else if (this.users.role == 'user') {
+            this.router.navigate(['/user']);
+          } else {
+            localStorage.clear();
+            // console.log('เปลี่ยนหน้าไม่ได้ ',this.users.role);
+            this.router.navigate(['/login']);
+          }
 
           this.toastr.success('ชื่อของคุณคือ: ' + this.users.firstname + ' ' + this.users.lastname, 'เข้าสู่ระบบสำเร็จ!!');
-        }else{
+        } else {
           this.toastr.error("อีเมล์หรือรหัสผ่านไม่ถูกต้อง");
         }
       });
-      // this.authService.GetByCode(this.loginForm.value.email).subscribe(data => {
-        
-      //   this.users = data;
-      //   this.users = (this.users.length > 0) ? this.users[0] : '';
 
-      //   if (this.users.users_password === this.loginForm.value.password) {
-
-      //     if (this.users.isactive) {
-
-      //       sessionStorage.setItem('usersname', this.users.users_email);
-      //       sessionStorage.setItem('usersid', this.users.id);
-      //       sessionStorage.setItem('usersrole', this.users.users_role);
-
-      //       if (this.users.users_role == 'admin') {
-      //         this.router.navigate(['/admin']);
-      //       } else if (this.users.users_role == 'user') {
-      //         this.router.navigate(['/user']);
-      //       } else {
-
-      //       }
-      //       this.toastr.success('อีเมล์ของคุณ: ' + this.loginForm.value.email, 'เข้าสู่ระบบสำเร็จ!!');
-      //     } else {
-      //       this.toastr.error('กรุณาติดต่อผู้ดูแลระบบ อีเมล์:vidocq.hrg@gmail.com', 'ผู้ใช้งานนี้ถูกระงับ');
-      //     }
-      //   } else {
-      //     this.toastr.error("อีเมล์หรือรหัสผ่านไม่ถูกต้อง");
-      //   }
-      // });
     }
 
   }

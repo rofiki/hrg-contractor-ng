@@ -13,8 +13,9 @@
 
           <div class="card shadow" style="opacity: 0.7; ">
             <div class="card-body">
+              <!-- form login -->
               <div class="m-sm-1">
-                <button (click)="regis()">เพิ่ม user</button>
+                <!-- <button (click)="regis()">เพิ่ม user</button> -->
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                   <div class="form-group mb-3">
                     <label class="form-label" for="email">Email</label>
@@ -38,7 +39,7 @@
                     <div class="form-check align-items-center">
                       <input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me"
                         name="remember-me" checked>
-                      <label class="form-check-label text-small" for="customControlInline">Remember me</label>
+                      <label class="form-check-label text-small" for="customControlInline">จดจำ</label>
                     </div>
                   </div>
                   <div class="d-grid gap-2 mt-3">
@@ -46,7 +47,9 @@
                         class="fa-solid fa-key"></i> Sign in </button>
                   </div>
                 </form>
+
               </div>
+              <!-- / form login -->
             </div>
           </div>
           <!-- <div class="text-center mb-3">
