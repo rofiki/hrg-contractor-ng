@@ -14,7 +14,7 @@ export class AuthService {
 
   }
 
-  private apiUrl: string = this.dbService.getServiceURL() + '/users';
+  private apiUrl: string = this.dbService.getJsonServerURL() + '/users';
 
   GetAll() {
     return this.http.get(this.apiUrl)

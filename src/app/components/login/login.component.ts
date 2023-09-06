@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/service/auth.service';
+import { ApiService } from 'src/app/api.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private apiService:ApiService,
+    ) {
     //sessionStorage.clear();
 
     if (sessionStorage.getItem('usersrole') != null) {
@@ -47,9 +50,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
 
       this.authService.GetByCode(this.loginForm.value.email).subscribe(data => {
+        
         this.users = data;
         this.users = (this.users.length > 0) ? this.users[0] : '';
-        //console.log(this.users);
 
         if (this.users.users_password === this.loginForm.value.password) {
 

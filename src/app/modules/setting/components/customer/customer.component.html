@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        ข้อมูลบริษัทผู้จ้าง (ลูกค้า)
+        <div class="text-muted h6 fw-normal">
+            <small>ข้อมูลบริษัทผู้จ้าง (ลูกค้า)</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row">
+            <div class="col-md-8 border-end">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ชื่อ</th>
+                            <th>ที่อยู่</th>
+                            <th>เบอร์โทรศัพท์</th>
+                            <th>เลขที่ผู้เสียภาษี</th>
+                            <th style="width: 60px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let item of customer">
+                            <tr>
+                                <td class="fw-light">{{item.name}}</td>
+                                <td class="fw-light">{{item.address}} {{item.address2}}</td>
+                                <td class="fw-light">{{item.phone}}</td>
+                                <td class="fw-light">{{item.vatNumber}}</td>
+                                <td class="text-end"><i class="fa-solid fa-pen p-1"></i> <i
+                                        class="fa-solid fa-trash p-1"></i></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 ">ฟอร์มแก้ไข</div>
+        </div>
+
+
+    </div>
+</div>
+
+<app-footer></app-footer>
