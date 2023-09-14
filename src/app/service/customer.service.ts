@@ -1,21 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { DbService } from '../base/db.service';
+import { AppService } from '../base/app.service';
+import { BaseService } from '../base/base.service';
+
+import { switchMap, map, tap } from 'rxjs/operators';
+import { Observable, Subject, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  constructor(private http:HttpClient, private dbService: DbService) { }
+  constructor(private http: HttpClient, private dbService: DbService, private baseService:BaseService) {
+    console.log(this.baseService.getToken());
+   }
 
   private apiUrl: string = this.dbService.getServiceURL() + '/customers';
 
-  get(){
+  public get(id: number): Observable<any> {
+
+    if (!id || id == 0) {
+        throw new Error('Invalid areaId');
+    }
+
+    let token: string = this.baseService.getToken();
+    let headers = new HttpHeaders({ Authorization: "Bearer " + token });
+
+    return this.http.get(this.apiUrl + id.toString(), {  });
+  }
+
+  getById(id: any) {
     return this.http.get<any>(this.apiUrl);
   }
 
-  getById(id:any){
-    return this.http.get<any>(this.apiUrl);
-  }
 }

@@ -40,10 +40,6 @@ export class CustomerAddComponent implements OnInit {
 
   }
 
-  chkLogin(){
-
-  }
-
   onSubmit() {
     console.log(this.createForm.value);
   }

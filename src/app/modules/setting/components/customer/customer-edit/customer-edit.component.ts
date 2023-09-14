@@ -16,10 +16,6 @@ export class CustomerEditComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
-  chkLogin(){
-    
-  }
-
   onSubmit(){
 
   }

@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(this.loginForm.value).subscribe(data => {
         this.users = data
-        // console.log(this.users);
         if (this.users.status) {
 
           localStorage.setItem('firstname', this.users.ufirstname);
@@ -74,7 +73,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/user']);
           } else {
             localStorage.clear();
-            // console.log('เปลี่ยนหน้าไม่ได้ ',this.users.role);
             this.router.navigate(['/login']);
           }
 
