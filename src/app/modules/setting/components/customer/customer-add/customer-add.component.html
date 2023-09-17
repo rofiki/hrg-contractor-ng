@@ -41,11 +41,11 @@
                     <div class="mb-3">
                         <label for="" class="form-label m-0">เบอร์โทรศัพท์ <span
                                 class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="" formControlName="phonenumber">
-                        <div *ngIf="(createForm.controls['phonenumber'].hasError('required') && (createForm.get('phonenumber')?.dirty || createForm.get('phonenumber')?.touched))">
+                        <input type="text" class="form-control" id="" formControlName="phone">
+                        <div *ngIf="(createForm.controls['phone'].hasError('required') && (createForm.get('phone')?.dirty || createForm.get('phone')?.touched))">
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> เบอร์โทรศัพท์ ห้ามว่าง</small>
                         </div>                        
-                        <div *ngIf="(createForm.controls['phonenumber'].hasError('pattern') && (createForm.get('phonenumber')?.dirty || createForm.get('phonenumber')?.touched))">
+                        <div *ngIf="(createForm.controls['phone'].hasError('pattern') && (createForm.get('phone')?.dirty || createForm.get('phone')?.touched))">
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ตัวเลขเท่านั้น</small>
                         </div>                        
                     </div>

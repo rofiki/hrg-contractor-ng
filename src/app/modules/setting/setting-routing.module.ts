@@ -9,7 +9,9 @@ import { CustomerEditComponent } from './components/customer/customer-edit/custo
 const routes: Routes = [
   { path: '', component: SettingComponent },
   { path: 'bookbank', component: BookbankComponent },
+
   { path: 'customer', component: CustomerComponent },
+  { path: 'customer/:id', component: CustomerComponent },
   { path: 'customernew', component: CustomerAddComponent },
   { path: 'customeredit/:id', component: CustomerEditComponent },
 ];

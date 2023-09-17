@@ -13,26 +13,43 @@ import { Observable, Subject, lastValueFrom } from 'rxjs';
 })
 export class CustomerService {
 
-  constructor(private http: HttpClient, private dbService: DbService, private baseService:BaseService) {
-    console.log(this.baseService.getToken());
-   }
+  constructor(private http: HttpClient, private dbService: DbService, private baseService: BaseService) {
+    // console.log(this.baseService.getToken());
+  }
 
   private apiUrl: string = this.dbService.getServiceURL() + '/customers';
 
-  public get(id: number): Observable<any> {
+  // public get(id: number): Observable<any> {
 
-    if (!id || id == 0) {
-        throw new Error('Invalid areaId');
-    }
+  //   if (!id || id == 0) {
+  //     throw new Error('Invalid areaId');
+  //   }
 
-    let token: string = this.baseService.getToken();
-    let headers = new HttpHeaders({ Authorization: "Bearer " + token });
+  //    let token: string = this.baseService.getToken();
+  //    let headers = new HttpHeaders({ Authorization: "Bearer " + token });
 
-    return this.http.get(this.apiUrl + id.toString(), {  });
+  //   return this.http.get(this.apiUrl + id.toString(), {});
+  // }
+
+  get(id: any): Observable<any> {
+    //let headers = new HttpHeaders({ Authorization: "Bearer " });
+    //return headers;
+    return this.http.get<any>(this.apiUrl + '/' + id);
   }
 
-  getById(id: any) {
+  getAll(): Observable<any> {
+    //let headers = new HttpHeaders({ Authorization: "Bearer " });
+    //return headers;
     return this.http.get<any>(this.apiUrl);
   }
+
+  getByCondition(search = {}): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+
+  public create(params: {}) : Observable<any>{
+		return this.http.post( this.apiUrl + '/' , params);
+	}
+
 
 }

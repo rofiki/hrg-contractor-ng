@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/service/customer.service';
 import { map, switchMap } from 'rxjs';
-import { ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { AppService } from 'src/app/base/app.service';
 
@@ -15,28 +15,54 @@ import { AppService } from 'src/app/base/app.service';
 export class CustomerComponent implements OnInit {
 
 
-  constructor(private service: CustomerService) {}
+  constructor(private service: CustomerService, private route: ActivatedRoute) { }
 
-  items: any;
+  public items: any = null;
+  public user: any = null;
+  public isProcess: boolean = false;
 
-  public user:any = null;
-	public itemRef :any = null;
-
-	public start : number = 0;
-	public limit : number = 25;
-
-	public isProcess:boolean = false;
-
-	// public itemNew = {
-	// 	id : 0, name : null, holiday : new Date
-	// }
+  // public itemNew = {
+  // 	id : 0, name : null, holiday : new Date
+  // }
 
 
 
   ngOnInit(): void {
-    this.listData();
+
+    // let id = this.route.snapshot.params['id'];
+
+    // this.service.get().subscribe(
+    //   res => {
+    //     this.items = res;
+    //     console.log(this.items);
+    //     return this.items;
+    //   }
+    // );
+
+    this.getItems();
   }
 
-  listData() {}
+  async getItems() {
+
+    await this.service.getAll().subscribe(
+      res => {
+        this.items = res;
+        console.log(this.items);
+        return this.items;
+      }
+    );
+
+  }
+  
+
+  // public listData() {
+
+  //   this.service.getById('').subscribe(
+  //     res => {
+  //       this.items = res;
+  //       console.log(this.items);
+  //     }
+  //   );
+  // }
 
 }
