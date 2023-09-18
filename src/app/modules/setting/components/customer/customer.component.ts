@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/service/customer.service';
 import { map, switchMap } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { AppService } from 'src/app/base/app.service';
 
@@ -20,6 +21,10 @@ export class CustomerComponent implements OnInit {
   public items: any = null;
   public user: any = null;
   public isProcess: boolean = false;
+
+  public loading: boolean = true;
+  //public loading = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+  faCircle = faCircle;
 
   // public itemNew = {
   // 	id : 0, name : null, holiday : new Date
@@ -44,13 +49,16 @@ export class CustomerComponent implements OnInit {
 
   async getItems() {
 
+   // this.loading = 'loading...';
     await this.service.getAll().subscribe(
       res => {
+        //this.loading = 'loading...';
         this.items = res;
         console.log(this.items);
+        this.loading = false;
         return this.items;
       }
-    );
+    )
 
   }
   

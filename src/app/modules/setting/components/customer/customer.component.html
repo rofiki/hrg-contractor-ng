@@ -6,6 +6,7 @@
         <div class="text-muted h6 fw-normal">
             <small>ข้อมูลบริษัทผู้จ้าง (ลูกค้า)</small>
         </div>
+        <!-- {{loading}} -->
     </div>
     <div class="bg-white border mt-4 p-4 shadow">
         <div class="row">
@@ -21,17 +22,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let item of items">
-                            <tr>
-                                <td class="fw-light">{{item.name}}</td>
-                                <td class="fw-light">{{item.address}} {{item.address2}}</td>
-                                <td class="fw-light">{{item.phone}}</td>
-                                <td class="fw-light">{{item.vatNumber}}</td>
-                                <td class="text-end">
-                                    <a [routerLink]="['/setting/customeredit/' + item.id]"><i class="fa-solid fa-pen p-1"></i> </a>
-                                    <i class="fa-solid fa-trash p-1"></i></td>
-                            </tr>
+                        <ng-container *ngIf="loading">
                         </ng-container>
+                        <div *ngIf="loading; then showLoading else ShowData"></div>
+                        <ng-template #showLoading>
+                            <span class=""><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</span>
+                        </ng-template>
+                        <ng-template #ShowData>
+                            <ng-container *ngFor="let item of items">
+                                <tr>
+                                    <td class="fw-light">{{item.name}}</td>
+                                    <td class="fw-light">{{item.address}} {{item.address2}}</td>
+                                    <td class="fw-light">{{item.phone}}</td>
+                                    <td class="fw-light">{{item.vatNumber}}</td>
+                                    <td class="text-end">
+                                        <a [routerLink]="['/setting/customer/edit/' + item.id]"><i
+                                                class="fa-solid fa-pen p-1"></i> </a>
+                                        <i class="fa-solid fa-trash p-1"></i>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-template>
                     </tbody>
                 </table>
                 <button class="btn btn-primary" [routerLink]="['/setting/customernew']">เพิ่มข้อมูล</button>

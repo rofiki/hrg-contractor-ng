@@ -30,7 +30,7 @@
                         <label for="" class="form-label m-0">ที่อยู่ <span
                                 class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="" formControlName="address">
-                        <div *ngIf="(createForm.controls['name'].hasError('required') && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
+                        <div *ngIf="(createForm.controls['address'].hasError('required') && (createForm.get('address')?.dirty || createForm.get('address')?.touched))">
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ที่อยู่ ห้ามว่าง</small>
                         </div>                       
                     </div>

@@ -11,9 +11,8 @@ const routes: Routes = [
   { path: 'bookbank', component: BookbankComponent },
 
   { path: 'customer', component: CustomerComponent },
-  { path: 'customer/:id', component: CustomerComponent },
   { path: 'customernew', component: CustomerAddComponent },
-  { path: 'customeredit/:id', component: CustomerEditComponent },
+  { path: 'customer/edit/:id', component: CustomerEditComponent },
 ];
 
 @NgModule({

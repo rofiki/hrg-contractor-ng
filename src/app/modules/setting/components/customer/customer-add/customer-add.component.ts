@@ -18,13 +18,11 @@ export class CustomerAddComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private service: CustomerService,
-  ) {
-
-  
-  }
+  ) { }
 
   public createForm!: FormGroup;
 
+  public id:any;
   public items: any = null;
   public user: any = null;
   public isProcess: boolean = false;
