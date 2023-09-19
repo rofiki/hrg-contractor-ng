@@ -6,7 +6,7 @@
 
 อื่น ๆ
 - bank บัญชีธนาคาร
-- customer บริษัทผู้จ้าง
+- customer บริษัทผู้จ้าง (add edit delete = เสร็จ)
 - mycompany บริษัทตัวเอง
 
 users

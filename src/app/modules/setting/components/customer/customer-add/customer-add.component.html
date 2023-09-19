@@ -10,7 +10,7 @@
     <div class="bg-white border mt-4 p-4 shadow">
         <div class="row">
             <div class="col-md-8">
-                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit(template)">
                     <div class="mb-3">
                         <label for="" class="form-label m-0">ชื่อ-นามสกุล <span
                                 class="text-danger">*</span></label>
@@ -56,8 +56,8 @@
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ตัวเลขเท่านั้น</small>
                         </div>                            
                     </div>
-                    <button type="submit" class="btn btn-primary me-1" [disabled]="createForm.invalid"> บันทึก </button>
-                    <button class="btn btn-secondary " [routerLink]="['/setting/customer']">กลับ</button>
+                    <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="createForm.invalid"><i class="fa-regular fa-floppy-disk"></i> บันทึก </button>
+                    <button class="btn btn-secondary btn-sm " [routerLink]="['/setting/customer']"><i class="fa-solid fa-arrow-left"></i> กลับ</button>
                 </form>
             </div>
 
@@ -66,5 +66,18 @@
 
     </div>
 </div>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>ยืนยันเพื่มข้อมูลบริษัทผู้จ้าง (ลูกค้า)</p>
 
+    <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+    <ng-template #showSaveLoading>
+        <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+    </ng-template>   
+
+    <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)"  (click)="confirm()" >ยืนยัน</button>
+    <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)" (click)="decline()" >ยกเลิก</button>
+    
+  </div>
+</ng-template>
 <app-footer></app-footer>

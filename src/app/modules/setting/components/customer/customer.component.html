@@ -36,16 +36,20 @@
                                     <td class="fw-light">{{item.phone}}</td>
                                     <td class="fw-light">{{item.vatNumber}}</td>
                                     <td class="text-end">
-                                        <a [routerLink]="['/setting/customer/edit/' + item.id]"><i
-                                                class="fa-solid fa-pen p-1"></i> </a>
-                                        <i class="fa-solid fa-trash p-1"></i>
+                                        <a [routerLink]="['/setting/customer/edit/' + item.id]">
+                                            <i class="fa-solid fa-pen p-1"></i> 
+                                        </a>
+                                        <a href="javascript:void(0)" (click)="openModal_delete( template, item.id )" class="text-danger">
+                                            <i class="fa-solid fa-trash p-1"></i>
+                                        </a>
+                                        
                                     </td>
                                 </tr>
                             </ng-container>
                         </ng-template>
                     </tbody>
                 </table>
-                <button class="btn btn-primary" [routerLink]="['/setting/customernew']">เพิ่มข้อมูล</button>
+                <button class="btn btn-primary btn-sm" [routerLink]="['/setting/customernew']"><i class="fa-solid fa-circle-plus"></i> เพิ่มข้อมูล</button>
             </div>
 
         </div>
@@ -53,5 +57,18 @@
 
     </div>
 </div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันลบข้อมูล</p>
 
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังประมวลผล...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-danger btn-sm me-1" [disabled]="(isProcess == true)" (click)="confirm(idRef)">ลบ</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)" (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
 <app-footer></app-footer>

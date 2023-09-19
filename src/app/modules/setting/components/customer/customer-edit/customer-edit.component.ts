@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { CustomerService } from 'src/app/service/customer.service';
 
 import { firstValueFrom, lastValueFrom, Observable, Subscription } from 'rxjs';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-customer-edit',
@@ -20,16 +21,18 @@ export class CustomerEditComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private service: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: BsModalService
   ) {
     const id: any = this.route.snapshot.paramMap.get('id');
   }
 
+  public modalRef!: BsModalRef;
   public EditForm!: FormGroup;
 
-  public items: any = null;
+  // public items: any = null;
   public isProcess: boolean = false;
-  public loading: boolean = true;
+  public editForm: boolean = true;
 
 
 
@@ -37,6 +40,7 @@ export class CustomerEditComponent implements OnInit {
 
     this.EditForm = this.fb.group({
       // email: this.fb.control('', Validators.compose([Validators.required, Validators.email])),
+      id: this.fb.control('', []),
       name: this.fb.control('', [Validators.required]),
       address: this.fb.control('', [Validators.required]),
       phone: this.fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -47,15 +51,23 @@ export class CustomerEditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.service.get(params['id']).subscribe(res => {
 
-        res = res[0];
-        this.EditForm.patchValue({
+        if (res.length > 0) {
 
-          name: res.name,
-          address: res.address,
-          address2: res.address2,
-          phone: res.phone,
-          vatNumber: res.vatNumber
-        });
+          this.editForm = true;
+          res = res[0];
+          this.EditForm.patchValue({
+
+            id: res.id,
+            name: res.name,
+            address: res.address,
+            address2: res.address2,
+            phone: res.phone,
+            vatNumber: res.vatNumber
+
+          });
+        } else {
+          this.editForm = false;
+        }
 
         //console.log('res = ', res);
       });
@@ -63,24 +75,32 @@ export class CustomerEditComponent implements OnInit {
 
   }
 
-  public async onSubmit() {
+  public async onSubmit(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
 
-    // let params = this.EditForm.value;
+  async confirm() {
 
-    // let confirmResult = confirm('ยืนยันเพื่มข้อมูลบริษัทผู้จ้าง (ลูกค้า)');
-    // if(confirmResult){
-    //   await this.service.create(params).subscribe(res => {
+    let value = this.EditForm.value;
+    this.isProcess = true;
 
-    //     if(res.status){
-    //       this.toastr.success(res.data.name, 'เพิ่มข้อมูลบริษัทผู้จ้าง (ลูกค้า) สำเร็จ!!');
-    //       this.router.navigate(['/setting/customer']);
-    //     }else{
-    //       this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
-    //       this.EditForm.reset();
-    //     }
-    //     //console.log(res);
-    //   });
-    // }
+    await this.service.update(value).subscribe(res => {
+      if (res.status) {
+        this.modalRef.hide();
+        this.toastr.success('', 'แก้ไขข้อมูลบริษัทผู้จ้าง (ลูกค้า) สำเร็จ!!');
+        this.router.navigate(['/setting/customer']);
+      } else {
+        this.modalRef.hide();
+        this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+        this.EditForm.reset();
+        this.isProcess = false;
+      }
+    });
+
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 
 }

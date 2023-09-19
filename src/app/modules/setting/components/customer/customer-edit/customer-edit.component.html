@@ -9,62 +9,89 @@
     </div>
     <div class="bg-white border mt-4 p-4 shadow">
         <div class="row">
-            <div class="col-md-8">
-                <form [formGroup]="EditForm" (ngSubmit)="onSubmit()">
-                    <div class="mb-3">
-                        <label for="" class="form-label m-0">ชื่อ-นามสกุล <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="name" name="name" formControlName="name">
-                        <!-- <div
-                            *ngIf="(createForm.get('name')?.invalid && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
-                        </div> -->
-                        <div *ngIf="(EditForm.controls['name'].hasError('required') && (EditForm.get('name')?.dirty || EditForm.get('name')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ชื่อ-นามสกุล ห้ามว่าง</small>
+            <div *ngIf="(editForm) then showEditForm else showNotFound"></div>
+            <ng-template #showNotFound><div class="col-md-8">ไม่พบข้อมูล</div></ng-template>
+            <ng-template #showEditForm>
+                <div class="col-md-8">
+                    <form [formGroup]="EditForm" (ngSubmit)="onSubmit(template)">
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name">
+                            <!-- <div
+                                *ngIf="(createForm.get('name')?.invalid && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
+                            </div> -->
+                            <div
+                                *ngIf="(EditForm.controls['name'].hasError('required') && (EditForm.get('name')?.dirty || EditForm.get('name')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ชื่อ-นามสกุล
+                                    ห้ามว่าง</small>
+                            </div>
+                            <!-- <div *ngIf="(createForm.controls['name'].hasError('email') && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> email ไม่ถูกต้อง</small>
+                            </div> -->
                         </div>
-                        <!-- <div *ngIf="(createForm.controls['name'].hasError('email') && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> email ไม่ถูกต้อง</small>
-                        </div> -->
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label m-0">ที่อยู่ <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="address" id="address" name="address">
-                        <div *ngIf="(EditForm.controls['address'].hasError('required') && (EditForm.get('address')?.dirty || EditForm.get('address')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ที่อยู่ ห้ามว่าง</small>
-                        </div>                       
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label m-0">ที่อยู่ 2</label>
-                        <input type="text" class="form-control" id="" formControlName="address2">
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label m-0">เบอร์โทรศัพท์ <span
-                                class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="" formControlName="phone">
-                        <div *ngIf="(EditForm.controls['phone'].hasError('required') && (EditForm.get('phone')?.dirty || EditForm.get('phone')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> เบอร์โทรศัพท์ ห้ามว่าง</small>
-                        </div>                        
-                        <div *ngIf="(EditForm.controls['phone'].hasError('pattern') && (EditForm.get('phone')?.dirty || EditForm.get('phone')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ตัวเลขเท่านั้น</small>
-                        </div>                        
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label m-0">เลขที่บัตรประชาชน/เลขที่ภาษีอากร</label>
-                        <input type="text" class="form-control" id="" formControlName="vatNumber">
-                        <div *ngIf="(EditForm.controls['vatNumber'].hasError('pattern') && (EditForm.get('vatNumber')?.dirty || EditForm.get('vatNumber')?.touched))">
-                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ตัวเลขเท่านั้น</small>
-                        </div>                            
-                    </div>
-                    <button type="submit" class="btn btn-primary me-1" [disabled]="EditForm.invalid"> แก้ไข </button>
-                    <button class="btn btn-secondary " [routerLink]="['/setting/customer']">กลับ</button>
-                </form>
-            </div>
-
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">ที่อยู่ <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="address" id="address"
+                                name="address">
+                            <div
+                                *ngIf="(EditForm.controls['address'].hasError('required') && (EditForm.get('address')?.dirty || EditForm.get('address')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ที่อยู่
+                                    ห้ามว่าง</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">ที่อยู่ 2</label>
+                            <input type="text" class="form-control" id="" formControlName="address2">
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">เบอร์โทรศัพท์ <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="" formControlName="phone">
+                            <div
+                                *ngIf="(EditForm.controls['phone'].hasError('required') && (EditForm.get('phone')?.dirty || EditForm.get('phone')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> เบอร์โทรศัพท์
+                                    ห้ามว่าง</small>
+                            </div>
+                            <div
+                                *ngIf="(EditForm.controls['phone'].hasError('pattern') && (EditForm.get('phone')?.dirty || EditForm.get('phone')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
+                                    ตัวเลขเท่านั้น</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">เลขที่บัตรประชาชน/เลขที่ภาษีอากร</label>
+                            <input type="text" class="form-control" id="" formControlName="vatNumber">
+                            <div
+                                *ngIf="(EditForm.controls['vatNumber'].hasError('pattern') && (EditForm.get('vatNumber')?.dirty || EditForm.get('vatNumber')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
+                                    ตัวเลขเท่านั้น</small>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" id="id" formControlName="id">
+                        <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="EditForm.invalid"><i class="fa-solid fa-pen"></i> แก้ไข
+                        </button>
+                        <button class="btn btn-secondary btn-sm " [routerLink]="['/setting/customer']"><i class="fa-solid fa-arrow-left"></i> กลับ</button>
+                    </form>
+                </div>
+            </ng-template>
         </div>
 
 
     </div>
 </div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันแก้ไขข้อมูลบริษัทผู้จ้าง (ลูกค้า)</p>
 
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)" (click)="confirm()">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)" (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
 <app-footer></app-footer>

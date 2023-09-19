@@ -19,18 +19,6 @@ export class CustomerService {
 
   private apiUrl: string = this.dbService.getServiceURL() + '/customers';
 
-  // public get(id: number): Observable<any> {
-
-  //   if (!id || id == 0) {
-  //     throw new Error('Invalid areaId');
-  //   }
-
-  //    let token: string = this.baseService.getToken();
-  //    let headers = new HttpHeaders({ Authorization: "Bearer " + token });
-
-  //   return this.http.get(this.apiUrl + id.toString(), {});
-  // }
-
   get(id: any): Observable<any> {
     //let headers = new HttpHeaders({ Authorization: "Bearer " });
     //return headers;
@@ -47,9 +35,17 @@ export class CustomerService {
     return this.http.get<any>(this.apiUrl);
   }
 
-  public create(params: {}) : Observable<any>{
-		return this.http.post( this.apiUrl + '/' , params);
-	}
+  public create(params: {}): Observable<any> {
+    return this.http.post(this.apiUrl + '/', params);
+  }
+
+  public update(params: {}): Observable<any> {
+    return this.http.put(this.apiUrl + '/', params);
+  }
+
+  public delete(id: any): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + '/' + id);
+  }  
 
 
 }
