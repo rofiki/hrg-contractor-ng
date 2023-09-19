@@ -14,7 +14,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label m-0">ชื่อ-นามสกุล <span
                                 class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="" formControlName="name" [(ngModel)]="items.name">
+                        <input type="text" class="form-control" id="name" name="name" formControlName="name">
                         <!-- <div
                             *ngIf="(createForm.get('name')?.invalid && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ข้อมูลไม่ถูกต้อง</small>
@@ -29,7 +29,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label m-0">ที่อยู่ <span
                                 class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="address" [(ngModel)]="items.address">
+                        <input type="text" class="form-control" formControlName="address" id="address" name="address">
                         <div *ngIf="(EditForm.controls['address'].hasError('required') && (EditForm.get('address')?.dirty || EditForm.get('address')?.touched))">
                             <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ที่อยู่ ห้ามว่าง</small>
                         </div>                       

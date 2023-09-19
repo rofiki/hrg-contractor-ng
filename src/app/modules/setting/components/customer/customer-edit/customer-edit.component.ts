@@ -21,23 +21,20 @@ export class CustomerEditComponent implements OnInit {
     private authService: AuthService,
     private service: CustomerService,
     private route: ActivatedRoute
-  ) { 
-    const id:any = this.route.snapshot.paramMap.get('id');
-   }
+  ) {
+    const id: any = this.route.snapshot.paramMap.get('id');
+  }
 
   public EditForm!: FormGroup;
 
-  //id:any = this.route.snapshot.paramMap.get('id');
   public items: any = null;
-  public user: any = null;
-  public isProcess:boolean = false;
+  public isProcess: boolean = false;
   public loading: boolean = true;
 
-  
+
 
   ngOnInit() {
-    const id:any = this.route.snapshot.paramMap.get('id');
-    
+
     this.EditForm = this.fb.group({
       // email: this.fb.control('', Validators.compose([Validators.required, Validators.email])),
       name: this.fb.control('', [Validators.required]),
@@ -47,45 +44,24 @@ export class CustomerEditComponent implements OnInit {
       address2: this.fb.control('', [])
     });
 
-    // if(id){
-    //   this.service.get(id).subscribe({
-    //     next: param =>{
-    //       if(param.length != 0){
-    //         this.isProcess = true;
-    //         console.log('true',param);
+    this.route.params.subscribe(params => {
+      this.service.get(params['id']).subscribe(res => {
 
-    //         this.items = param;
-    //       }else{
-    //         this.isProcess = false;
-    //         console.log('false',param);
-    //       }
-    //       console.log(param);
-    //     }
-    //   });
-    // }
-    this.getItems(id);
-  }
+        res = res[0];
+        this.EditForm.patchValue({
 
-  getItems(id:any) {
+          name: res.name,
+          address: res.address,
+          address2: res.address2,
+          phone: res.phone,
+          vatNumber: res.vatNumber
+        });
 
-    // this.loading = 'loading...';
-    this.service.get(id).subscribe(
-      res => {
-        //this.loading = 'loading...';
-        this.items = res[0];
-        //console.log(this.items);
-        //console.log(this.items.address);
-        this.loading = false;
-       // return this.items;
-      }
-    )
-     let test = lastValueFrom(this.service.get(id)).then(data =>{
-      this.items = data[0];
-      console.log('data',this.items.name);
+        //console.log('res = ', res);
+      });
     });
-     //console.log('test',test);
- 
-   }
+
+  }
 
   public async onSubmit() {
 

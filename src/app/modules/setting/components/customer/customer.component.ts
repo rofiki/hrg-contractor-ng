@@ -23,8 +23,6 @@ export class CustomerComponent implements OnInit {
   public isProcess: boolean = false;
 
   public loading: boolean = true;
-  //public loading = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
-  faCircle = faCircle;
 
   // public itemNew = {
   // 	id : 0, name : null, holiday : new Date
@@ -49,28 +47,15 @@ export class CustomerComponent implements OnInit {
 
   async getItems() {
 
-   // this.loading = 'loading...';
     await this.service.getAll().subscribe(
       res => {
-        //this.loading = 'loading...';
         this.items = res;
-        console.log(this.items);
+        //console.log(this.items);
         this.loading = false;
         return this.items;
       }
     )
 
   }
-  
-
-  // public listData() {
-
-  //   this.service.getById('').subscribe(
-  //     res => {
-  //       this.items = res;
-  //       console.log(this.items);
-  //     }
-  //   );
-  // }
 
 }
