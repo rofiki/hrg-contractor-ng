@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        บริษัท
+        <div class="text-muted h6 fw-normal">
+            <small>ข้อมูลบริษัท/เจ้าของกิจการ</small>
+        </div>
+        <!-- {{loading}} -->
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row">
+            <div class="col-md-8">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit(template)">
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">ชื่อบริษัท <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="name">
+
+                        <div *ngIf="(createForm.controls['name'].hasError('required') && (createForm.get('name')?.dirty || createForm.get('name')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ชื่อบริษัท ห้ามว่าง</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">ที่อยู่ </label>
+                        <input type="text" class="form-control" id="" formControlName="address">                    
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">เบอร์โทรศัพท์ </label>
+                        <input type="text" class="form-control" id="" formControlName="phone">                                           
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">เลขที่บัตรประชาชน</label>
+                        <input type="text" class="form-control" id="" formControlName="idcard">                         
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">เลขที่ภาษีอากร</label>
+                        <input type="text" class="form-control" id="" formControlName="vatNumber">                         
+                    </div>                    
+                    <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="createForm.invalid"><i class="fa-regular fa-floppy-disk"></i> บันทึก </button>
+                    <button class="btn btn-secondary btn-sm " [routerLink]="['/setting/company']"><i class="fa-solid fa-arrow-left"></i> กลับ</button>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>ยืนยันเพื่มข้อมูล</p>
+
+    <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+    <ng-template #showSaveLoading>
+        <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+    </ng-template>   
+
+    <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)"  (click)="confirm()" >ยืนยัน</button>
+    <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)" (click)="decline()" >ยกเลิก</button>
+    
+  </div>
+</ng-template>
+<app-footer></app-footer>

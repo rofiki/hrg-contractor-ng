@@ -4,10 +4,11 @@
 - receipt ออกใบเสร็จ
 - payment บันทึกหลักฐานรับเงินสด/เช็ค/โอนเข้าบัญชี
 
-อื่น ๆ
+setting อื่น ๆ
 - bookbank บัญชีธนาคาร (add edit delete search pagination = เสร็จ)
 - customer บริษัทผู้จ้าง (add edit delete search pagination = เสร็จ)
-- mycompany บริษัทตัวเอง
+- mycompany บริษัทตัวเอง (add edit delete search pagination = เสร็จ)
+- costtype หมวดรายจ่าย *****************
 
 users
  - users_id

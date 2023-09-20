@@ -7,6 +7,9 @@ import { CustomerAddComponent } from './components/customer/customer-add/custome
 import { CustomerEditComponent } from './components/customer/customer-edit/customer-edit.component';
 import { BookbankAddComponent } from './components/bookbank/bookbank-add/bookbank-add.component';
 import { BookbankEditComponent } from './components/bookbank/bookbank-edit/bookbank-edit.component';
+import { CompanyComponent } from './components/company/company.component';
+import { CompanyAddComponent } from './components/company/company-add/company-add.component';
+import { CompanyEditComponent } from './components/company/company-edit/company-edit.component';
 
 const routes: Routes = [
   { path: '', component: SettingComponent },
@@ -18,6 +21,10 @@ const routes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'customer/new', component: CustomerAddComponent },
   { path: 'customer/edit/:id', component: CustomerEditComponent },
+
+  { path: 'company', component: CompanyComponent },
+  { path: 'company/new', component: CompanyAddComponent },
+  { path: 'company/edit/:id', component: CompanyEditComponent },
 ];
 
 @NgModule({

@@ -15,6 +15,10 @@ import { BookbankComponent } from './components/bookbank/bookbank.component';
 import { BookbankAddComponent } from './components/bookbank/bookbank-add/bookbank-add.component';
 import { BookbankEditComponent } from './components/bookbank/bookbank-edit/bookbank-edit.component';
 
+import { CompanyComponent } from './components/company/company.component';
+import { CompanyAddComponent } from './components/company/company-add/company-add.component';
+import { CompanyEditComponent } from './components/company/company-edit/company-edit.component';
+
 @NgModule({
   declarations: [
     SettingComponent,
@@ -26,6 +30,10 @@ import { BookbankEditComponent } from './components/bookbank/bookbank-edit/bookb
     BookbankComponent,
     BookbankAddComponent,
     BookbankEditComponent,
+    
+    CompanyComponent,
+    CompanyAddComponent,
+    CompanyEditComponent,
 
   
   ],
