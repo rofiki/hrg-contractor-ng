@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private authService: AuthService,
+    private auth: AuthService,
     private apiService: ApiService,
   ) {
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
 
-      this.authService.login(this.loginForm.value).subscribe(data => {
+      this.auth.login(this.loginForm.value).subscribe(data => {
         this.users = data
         if (this.users.status) {
 

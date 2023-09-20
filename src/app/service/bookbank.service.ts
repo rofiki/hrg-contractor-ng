@@ -11,7 +11,7 @@ import { Observable, Subject, lastValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class BookbankService {
 
   constructor(
     private http: HttpClient,
@@ -20,7 +20,7 @@ export class CustomerService {
     private app: AppService
   ) { }
 
-  private apiUrl: string = this.dbService.getServiceURL() + '/customers';
+  private apiUrl: string = this.dbService.getServiceURL() + '/bookbank';
 
   get(id: any): Observable<any> {
     //let headers = new HttpHeaders({ Authorization: "Bearer " });
@@ -34,10 +34,6 @@ export class CustomerService {
       this.apiUrl + this.app.getQueryString(params)
     );
   }
-
-  // getByCondition(search = {}): Observable<any> {
-  //   return this.http.get<any>(this.apiUrl);
-  // }
 
   public create(params: {}): Observable<any> {
     return this.http.post(this.apiUrl + '/', params);

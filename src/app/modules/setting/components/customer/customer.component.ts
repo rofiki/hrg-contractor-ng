@@ -60,6 +60,13 @@ export class CustomerComponent implements OnInit {
 
   }
 
+  searchItems (search:string = '')
+  {
+    this.search = (search != '')? search : '';
+    this.loading = true;
+    this.getItems();
+  }
+
   public async openModal_delete(template: TemplateRef<any>, id: any) {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
     this.idRef = id;

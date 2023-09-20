@@ -11,10 +11,10 @@
     <div class="bg-white border mt-4 p-4 shadow">
         <div class="row g-1">
             <div class="col-auto">
-                <input type="text" class="form-control form-control-sm" formControlName="search" id="search" name="search" placeholder="ค้นหา">
+                <input type="text" class="form-control form-control-sm" id="search" value="{{itemRef?.search}}" name="search" placeholder="ค้นหา" #searchValue>
             </div>
             <div class="col-auto">
-                <button class="btn btn-primary btn-sm"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                <button class="btn btn-primary btn-sm" type="button"  (click)="searchItems(searchValue.value);" ><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
             </div>
         </div>
         <div class="row">
@@ -62,7 +62,6 @@
 
                                     </td>
                                 </tr>
-
                             </ng-template>
                         </ng-template>
                     </tbody>
@@ -91,7 +90,7 @@
                     </div>							
                 </div>   
                           
-                <button class="btn btn-primary btn-sm" [routerLink]="['/setting/customernew']">
+                <button class="btn btn-primary btn-sm" [routerLink]="['/setting/customer/new']">
                     <i class="fa-solid fa-circle-plus"></i> เพิ่มข้อมูล
                 </button>
             </div>

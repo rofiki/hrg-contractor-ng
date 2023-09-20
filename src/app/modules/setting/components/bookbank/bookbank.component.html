@@ -1,1 +1,117 @@
-<p>bookbank works!</p>
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        บัญชีธนาคาร
+        <div class="text-muted h6 fw-normal">
+            <small>ข้อมูลบัญชีธนาคาร</small>
+        </div>
+        <!-- {{loading}} -->
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row g-1">
+            <div class="col-auto">
+                <input type="text" class="form-control form-control-sm" id="search" value="{{itemRef?.search}}" name="search" placeholder="ค้นหา" #searchValue>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm" type="button"  (click)="searchItems(searchValue.value);" ><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+                <table class="table table-striped border-top mt-2">
+                    <thead>
+                        <tr>
+                            <th>ชื่อบัญชีธนาคาร</th>
+                            <th>เลขที่บัญชี</th>
+                            <th>สาขา</th>
+                            <th style="width: 60px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="loading; then Loading else ShowData"></div>
+                        <ng-template #Loading>
+                            <tr>
+                                <td colspan="5"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template #ShowData>
+                            <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
+                            <ng-template #NotFound>
+                                <tr>
+                                    <td colspan="5">- ไม่พบข้อมูล -</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template #listItem>
+
+                                <tr *ngFor="let item of itemRef.data">
+                                    <td class="fw-light">{{item.bookbank_name}}</td>
+                                    <td class="fw-light">{{item.bookbank_number}}</td>
+                                    <td class="fw-light">{{item.bookbank_branch}}</td>
+                                    <td class="text-end">
+                                        <a [routerLink]="['/setting/bookbank/edit/' + item.id]" class="text-muted">
+                                            <i class="fa-solid fa-pen p-1"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" (click)="openModal_delete( template, item.id )" class="text-muted" >
+                                            <i class="fa-solid fa-trash p-1"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div *ngIf="itemRef?.data.length > 0" >
+                    <div class='small d-inline-block ps-1  title-font'>
+                        {{ itemRef?.pageStart + 1 }} - {{ itemRef?.pageStart + itemRef?.data.length }} of {{ itemRef.count }}
+                    </div>
+
+                    <div class="d-inline-block ps-1">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item {{ itemRef?.pageStart == 0 ? 'disabled' : '' }}" >
+                                <a class="page-link"  href="javascript:void(0)" 
+                                    (click)="pageEventChange(itemRef?.pageStart - itemRef?.pageLimit, itemRef?.pageLimit, itemRef?.search)" >                            
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item {{ itemRef?.pageStart + itemRef?.pageLimit >= itemRef.count ? 'disabled' : '' }}">
+                                <a class="page-link" 
+                                    href="javascript:void(0)" 
+                                    (click)="pageEventChange(itemRef?.pageStart + itemRef?.pageLimit, itemRef?.pageLimit, itemRef?.search)" >
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>							
+                </div>   
+                          
+                <button class="btn btn-primary btn-sm" [routerLink]="['/setting/bookbank/new']">
+                    <i class="fa-solid fa-circle-plus"></i> เพิ่มข้อมูล
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันลบข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังประมวลผล...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-danger btn-sm me-1" [disabled]="(isProcess == true)"
+            (click)="confirm(idRef)">ลบ</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+            (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
+<app-footer></app-footer>

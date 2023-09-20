@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        บัญชีธนาคาร
+        <div class="text-muted h6 fw-normal">
+            <small>ข้อมูลบัญชีธนาคาร</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row">
+            <div *ngIf="(editForm) then showEditForm else showNotFound"></div>
+            <ng-template #showNotFound><div class="col-md-8">ไม่พบข้อมูล</div></ng-template>
+            <ng-template #showEditForm>
+                <div class="col-md-8">
+                    <form [formGroup]="EditForm" (ngSubmit)="onSubmit(template)">
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">ชื่อบัญชีธนาคาร <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="bookbank_name" name="bookbank_name" formControlName="bookbank_name">
+                            <div
+                                *ngIf="(EditForm.controls['bookbank_name'].hasError('required') && (EditForm.get('bookbank_name')?.dirty || EditForm.get('bookbank_name')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> ชื่อบัญชีธนาคาร ห้ามว่าง</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">เลขที่บัญชี <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="bookbank_number" id="bookbank_number" name="bookbank_number">
+                            <div
+                                *ngIf="(EditForm.controls['bookbank_number'].hasError('required') && (EditForm.get('bookbank_number')?.dirty || EditForm.get('bookbank_number')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> เลขที่บัญชี ห้ามว่าง</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label m-0">สาขา</label>
+                            <input type="text" class="form-control" id="" formControlName="bookbank_branch">
+                        </div>
+                        <input type="hidden" class="form-control" id="id" formControlName="id">
+                        <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="EditForm.invalid"><i class="fa-solid fa-pen"></i> แก้ไข
+                        </button>
+                        <button class="btn btn-secondary btn-sm " [routerLink]="['/setting/bookbank']"><i class="fa-solid fa-arrow-left"></i> กลับ</button>
+                    </form>
+                </div>
+            </ng-template>
+        </div>
+
+
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันแก้ไขข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)" (click)="confirm()">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)" (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
+<app-footer></app-footer>

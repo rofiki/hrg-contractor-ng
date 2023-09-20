@@ -5,8 +5,8 @@
 - payment บันทึกหลักฐานรับเงินสด/เช็ค/โอนเข้าบัญชี
 
 อื่น ๆ
-- bank บัญชีธนาคาร
-- customer บริษัทผู้จ้าง (add edit delete = เสร็จ)
+- bookbank บัญชีธนาคาร (add edit delete search pagination = เสร็จ)
+- customer บริษัทผู้จ้าง (add edit delete search pagination = เสร็จ)
 - mycompany บริษัทตัวเอง
 
 users
