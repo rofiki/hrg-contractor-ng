@@ -29,33 +29,32 @@ export class CustomerComponent implements OnInit {
   ) { }
 
   public modalRef!: BsModalRef;
-  public items: any = null;
+  public itemRef: any = null;
+  public length: number = 0;
   public isProcess: boolean = false;
   public idRef: any = null;
 
   public loading: boolean = true;
 
   public start: number = 0;
-	public limit: number = 10;
+  public limit: number = 10;
+  public search: string = '';
 
   ngOnInit(): void {
 
     this.getItems();
-    // let params = { search? : 'test_search', status?: 1, type?: 0, start : 0, limit : 25 }
-    this.appService.getQueryString({ search: 'Rofiki Harong', start: this.start, limit : this.limit });
-
+    
   }
 
 
   async getItems() {
-    //let headers = new HttpHeaders({ Authorization : "Bearer " });
-    //console.log(headers);
-    await this.service.getAll().subscribe(
+    //  (params : { search? : string, status?: number, type?:number, start : number, limit : number })
+    await this.service.getAll({ search: this.search, start: this.start, limit: this.limit }).subscribe(
       res => {
-        this.items = res;
-        //console.log(this.items);
+        console.log(res);
+        
+        this.itemRef = res;
         this.loading = false;
-        return this.items;
       }
     )
 
@@ -90,5 +89,29 @@ export class CustomerComponent implements OnInit {
   decline(): void {
     this.modalRef.hide();
   }
+
+  public pageEventChange(start:number = 0, limit:number = 10, search:string = '') {
+
+		this.isProcess = true;
+    this.loading = true;
+
+		// TODO : get all,
+		this.service.getAll( { search: search, start : start , limit : limit }).subscribe({			
+
+			next :  result => {
+				this.itemRef = result;
+	  
+				// console.log(this.itemRef.data);		  
+				this.isProcess = false;
+        this.loading = false;
+
+			  } ,
+			error : refError => {
+				console.log(refError);
+				this.isProcess = false;
+			  }
+		})
+		
+	}
 
 }

@@ -13,7 +13,7 @@ import { Observable, Subject, lastValueFrom } from 'rxjs';
 })
 export class CustomerService {
 
-  constructor(private http: HttpClient, private dbService: DbService, private baseService: BaseService) {
+  constructor(private http: HttpClient, private dbService: DbService, private baseService: BaseService, private app: AppService) {
     // console.log(this.baseService.getToken());
   }
 
@@ -25,15 +25,16 @@ export class CustomerService {
     return this.http.get<any>(this.apiUrl + '/' + id);
   }
 
-  getAll(): Observable<any> {
-    //let headers = new HttpHeaders({ Authorization: "Bearer " });
-    //return headers;
-    return this.http.get<any>(this.apiUrl);
+  getAll(params: { search?: string, status?: number, type?: number, start: number, limit: number }): Observable<any> {
+    let headers = new HttpHeaders({ Authorization: "Bearer " });
+    return this.http.get<any>(
+      this.apiUrl + this.app.getQueryString(params)
+    );
   }
 
-  getByCondition(search = {}): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
-  }
+  // getByCondition(search = {}): Observable<any> {
+  //   return this.http.get<any>(this.apiUrl);
+  // }
 
   public create(params: {}): Observable<any> {
     return this.http.post(this.apiUrl + '/', params);
@@ -45,7 +46,7 @@ export class CustomerService {
 
   public delete(id: any): Observable<any> {
     return this.http.delete<any>(this.apiUrl + '/' + id);
-  }  
+  }
 
 
 }

@@ -26,7 +26,7 @@ export class AppService {
         }
       }
     }
-    console.log('paramsUrl = ', paramsUrl);
+    // console.log('paramsUrl = ', paramsUrl);
     return paramsUrl;
   }
 
