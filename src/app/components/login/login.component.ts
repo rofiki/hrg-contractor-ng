@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     if (localStorage.getItem('role') != null) {
       const role = localStorage.getItem('role');
-      this.router.navigate([role]);
+      this.router.navigate(['/work']);
     }else{
       localStorage.clear();
     }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('role', this.users.role);
 
           if (this.users.role == 'admin') {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/work']);
           } else if (this.users.role == 'user') {
             this.router.navigate(['/user']);
           } else {

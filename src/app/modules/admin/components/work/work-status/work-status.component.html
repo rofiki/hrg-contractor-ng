@@ -1,0 +1,125 @@
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">            
+        สถานะงาน
+        <div class="text-muted h6 fw-normal">
+            <small>ติดตามสถานะงาน ออกใบเสร็จ รับเงินเข้าบัญชี</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row g-1">
+            <div class="col-auto">
+                <input type="text" class="form-control form-control-sm" id="search" value="{{itemRef?.search}}" name="search" placeholder="ค้นหา Work ID" #searchValue>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm" type="button"  (click)="searchItems(searchValue.value);" ><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+                <table class="table table-striped border-top mt-2">
+                    <thead>
+                        <tr>
+                            <th>รายการงาน</th>
+                            <th>สถานะ</th>
+                            <th>เอกสาร</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="loading; then Loading else ShowData"></div>
+                        <ng-template #Loading>
+                            <tr>
+                                <td colspan="3"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template #ShowData>
+                            <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
+                            <ng-template #NotFound>
+                                <tr>
+                                    <td colspan="3">- ไม่พบข้อมูล -</td>
+                                </tr>
+                            </ng-template>
+                            <ng-template #listItem>
+
+                                <tr *ngFor="let item of itemRef.data">
+                                    <td>
+                                        <div class="pb-2"> Work ID : {{item.work_code}} </div>
+                                        <div class="pb-2 ng-star-inserted">
+                                            <div class="fw-bold me-2 small"> รายละเอียด </div>
+                                            <div class="small">{{item.work_place}}</div>
+                                            <div class="small">
+                                                <span class="fw-bold">ระยะ</span> {{item.work_distance}} เมตร
+                                                <span class="fw-bold">วันที่</span> {{item.work_job_start}} ถึง {{item.work_job_finish}}
+                                            </div>
+                                            <div class="small">
+                                                <a [routerLink]="['../detail/' + item.work_id]" class="" target="_blank">เพิ่มเติม</a>
+                                            </div>
+                                        </div>                                    
+                                    </td>
+                                    <td class="fw-light">
+                                        <div class="fw-bold"><strong>สถานะงาน</strong></div>
+                                        <div><span class="badge bg-success">เสร็จแล้ว</span></div>
+                                        <div class="fw-bold">สถานะตั้งเบิก</div>
+                                        <div><span class="badge bg-warning">ปิดงานแล้ว/ยังไม่ได้รับเงิน</span></div>
+                                    </td>
+                                    <td class="fw-light" style="width: 10px;">
+                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
+                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
+                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
+                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div *ngIf="itemRef?.data.length > 0" >
+                    <div class='small d-inline-block ps-1  title-font'>
+                        {{ itemRef?.pageStart + 1 }} - {{ itemRef?.pageStart + itemRef?.data.length }} of {{ itemRef.count }}
+                    </div>
+
+                    <div class="d-inline-block ps-1">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item {{ itemRef?.pageStart == 0 ? 'disabled' : '' }}" >
+                                <a class="page-link"  href="javascript:void(0)" 
+                                    (click)="pageEventChange(itemRef?.pageStart - itemRef?.pageLimit, itemRef?.pageLimit, itemRef?.search)" >                            
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item {{ itemRef?.pageStart + itemRef?.pageLimit >= itemRef.count ? 'disabled' : '' }}">
+                                <a class="page-link" 
+                                    href="javascript:void(0)" 
+                                    (click)="pageEventChange(itemRef?.pageStart + itemRef?.pageLimit, itemRef?.pageLimit, itemRef?.search)" >
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>							
+                </div>   
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันลบข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังประมวลผล...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-danger btn-sm me-1" [disabled]="(isProcess == true)"
+            (click)="confirm(idRef)">ลบ</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+            (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
+<app-footer></app-footer>

@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -9,12 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   modalRef?: BsModalRef;
   public getRole = localStorage.getItem('role');
+  public path:string ='';
 
   constructor(private modalService: BsModalService, private toastr: ToastrService, private router: Router) { }
+
+  ngOnInit(): void {
+    
+    if(this.getRole == 'admin' || this.getRole == 'user'){
+      this.path = 'work';
+    }
+
+  }
 
   logout() {
     localStorage.clear();

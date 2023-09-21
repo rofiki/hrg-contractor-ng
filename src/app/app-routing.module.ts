@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule), canActivate:[AuthGuard] },
+  { path: 'work', loadChildren: () => import('./modules/admin/admin.module').then((m) => m.AdminModule), canActivate:[AuthGuard] },
   { path: 'setting', loadChildren: () => import('./modules//setting/setting.module').then((m) => m.SettingModule), canActivate:[AuthGuard] },
   { path: '**', component: NotFoundComponent }
 ];

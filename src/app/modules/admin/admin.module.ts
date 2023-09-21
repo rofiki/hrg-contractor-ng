@@ -11,6 +11,7 @@ import { WorkComponent } from './components/work/work.component';
 import { CostComponent } from './components/cost/cost.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { WorkStatusComponent } from './components/work/work-status/work-status.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     CostComponent,
     ReceiptComponent,
     PaymentComponent,
+    WorkStatusComponent,
   ],
   imports: [
     CommonModule,

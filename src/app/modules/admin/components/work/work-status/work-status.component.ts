@@ -7,23 +7,22 @@ import { AppService } from 'src/app/base/app.service';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { HttpHeaders } from '@angular/common/http';
-import { CompanyService } from 'src/app/service/company.service';
+import { WorkStatusService } from 'src/app/service/work-status.service';
 
 @Component({
-  selector: 'app-company',
-  templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss']
+  selector: 'app-work-status',
+  templateUrl: './work-status.component.html',
+  styleUrls: ['./work-status.component.scss']
 })
-export class CompanyComponent implements OnInit {
+export class WorkStatusComponent implements OnInit {
 
   constructor(
-    private service: CompanyService,
+    private service: WorkStatusService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private appService: AppService
   ) { }
-
 
   public modalRef!: BsModalRef;
   public itemRef: any = null;
