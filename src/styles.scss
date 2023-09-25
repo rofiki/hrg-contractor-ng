@@ -10,6 +10,14 @@ body {
   margin: 0;
   font-size: 14px;
   font-family: "Prompt", sans-serif;
+  // background-image: url('https://img.freepik.com/free-vector/blue-curve-background_53876-113112.jpg?w=1380&t=st=1695658942~exp=1695659542~hmac=2ceb4e23fbed8a59a0f1341cc002e608e982194e641ca3af643e4a11b6cd3c7a');
+  // background-size: cover;
+  Background: Radial-Gradient(
+    Ellipse At Center,
+    #Fffeea 0%,
+    #Fffeea 35%,
+    #B7e8eb 100%
+);
 }
 
 .main-body {
@@ -27,4 +35,8 @@ input.ng-touched.ng-invalid {
 input.ng-touched.ng-valid {
   border: 2px solid #198754;
   color: #198754;
+}
+
+a:link {
+  text-decoration: none;
 }
