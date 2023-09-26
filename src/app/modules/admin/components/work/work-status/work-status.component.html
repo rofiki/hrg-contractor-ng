@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<div class="container main-body">
+<div class="container-fluid main-body">
     <div class="h3">            
         สถานะงาน
         <div class="text-muted h6 fw-normal">
@@ -21,64 +21,58 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                
-                <table class="table table-striped border-top mt-2">
-                    <thead>
-                        <tr>
-                            <th>รายการงาน</th>
-                            <th>สถานะ</th>
-                            <th>เอกสาร</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <div *ngIf="loading; then Loading else ShowData"></div>
-                        <ng-template #Loading>
+                <div class="table-responsive">      
+                    <table class="table table-striped border-top mt-2">
+                        <thead>
                             <tr>
-                                <td colspan="3"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
+                                <th>เลขที่ Work</th>
+                                <th>รายละเอียด</th>
+                                <th>วันที่ดำเนินการ</th>
+                                <th>สถานะตั้งเบิก</th>
+                                <th>เอกสาร</th>
                             </tr>
-                        </ng-template>
-
-                        <ng-template #ShowData>
-                            <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
-                            <ng-template #NotFound>
+                        </thead>
+                        <tbody>
+                            <div *ngIf="loading; then Loading else ShowData"></div>
+                            <ng-template #Loading>
                                 <tr>
-                                    <td colspan="3">- ไม่พบข้อมูล -</td>
+                                    <td colspan="4"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
                                 </tr>
                             </ng-template>
-                            <ng-template #listItem>
 
-                                <tr *ngFor="let item of itemRef.data">
-                                    <td>
-                                        <div class="pb-2"> Work ID : {{item.work_code}} </div>
-                                        <div class="pb-2 ng-star-inserted">
-                                            <div class="fw-bold me-2 small"> รายละเอียด </div>
-                                            <div class="small">{{item.work_place}}</div>
+                            <ng-template #ShowData>
+                                <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
+                                <ng-template #NotFound>
+                                    <tr>
+                                        <td colspan="4">- ไม่พบข้อมูล -</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template #listItem>
+
+                                    <tr *ngFor="let item of itemRef.data">
+                                        <td class="fw-light">
+                                            <div class="">
+                                                <span *ngIf="item.work_status == 0"><span class="badge bg-warning text-dark">ยังไม่เสร็จ</span></span>
+                                                <span *ngIf="item.work_status == 1"><span class="badge bg-success">เสร็จแล้ว</span></span>
+                                                <a [routerLink]="['../detail/' + item.work_id]" class="" target="_blank"> {{item.work_code}}</a> </div>                                
+                                        </td>
+                                        <td class="fw-light">
+                                            <div>{{item.work_place}} </div>
                                             <div class="small">
-                                                <span class="fw-bold">ระยะ</span> {{item.work_distance | number: '1.0-0'}} เมตร
-                                                <span class="fw-bold">วันที่</span> {{ item.work_job_start | date: 'dd/MM/yyyy'}} ถึง {{item.work_job_finish | date: 'dd/MM/yyyy'}}
+                                                <span class="fw-bold">ระยะ</span> {{item.work_distance}} เมตร
+                                                <span class="fw-bold">วันที่</span> {{item.work_job_start}} ถึง {{item.work_job_finish}}
                                             </div>
-                                            <div class="small">
-                                                <a [routerLink]="['../detail/' + item.work_id]" class="" target="_blank">เพิ่มเติม</a>
+                                            <div>
+                                                <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> ใบเสร็จรับเงิน</span>
+                                                <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span>
                                             </div>
-                                        </div>                                    
-                                    </td>
-                                    <td class="fw-light">
-                                        <div class="fw-bold"><strong>สถานะงาน</strong></div>
-                                        <div><span class="badge bg-success">เสร็จแล้ว</span></div>
-                                        <div class="fw-bold">สถานะตั้งเบิก</div>
-                                        <div><span class="badge bg-warning">ปิดงานแล้ว/ยังไม่ได้รับเงิน</span></div>
-                                    </td>
-                                    <td class="fw-light" style="width: 10px;">
-                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
-                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
-                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
-                                        <div><span class="badge bg-danger"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span></div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                </ng-template>
                             </ng-template>
-                        </ng-template>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <div *ngIf="itemRef?.data.length > 0" >
                     <div class='small d-inline-block ps-1  title-font'>
                         {{ itemRef?.pageStart + 1 }} - {{ itemRef?.pageStart + itemRef?.data.length }} of {{ itemRef.count }}
