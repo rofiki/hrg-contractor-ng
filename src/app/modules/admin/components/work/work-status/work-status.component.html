@@ -60,13 +60,24 @@
                                             <div>{{item.work_place}} </div>
                                             <div class="small">
                                                 <span class="fw-bold">ระยะ</span> {{item.work_distance}} เมตร
-                                                <span class="fw-bold">วันที่</span> {{item.work_job_start}} ถึง {{item.work_job_finish}}
                                             </div>
+                                        </td>
+                                        <td class="fw-light">
+                                            {{item.work_job_start}} ถึง {{item.work_job_finish}}
+                                        </td>    
+                                        <td class="fw-light">
+                                            <span class="badge bg-warning text-dark">ตั้งเบิกแล้ว/ยังไม่ได้รับเงิน</span>
+                                        </td>   
+                                        <td class="fw-light">
                                             <div>
                                                 <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> ใบเสร็จรับเงิน</span>
                                                 <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span>
                                             </div>
-                                        </td>
+                                            <div>
+                                                <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> ใบเสร็จรับเงิน</span>
+                                                <span class="badge bg-danger me-2"><i class="fa-solid fa-paperclip"></i> หลักฐานรับเงิน</span>
+                                            </div>                                                                                        
+                                        </td>                                                                           
                                     </tr>
                                 </ng-template>
                             </ng-template>
