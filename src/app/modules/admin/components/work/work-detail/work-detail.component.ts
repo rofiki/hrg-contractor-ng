@@ -6,18 +6,23 @@ import { ToastrService } from 'ngx-toastr';
 import { AppService } from 'src/app/base/app.service';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+
 import { HttpHeaders } from '@angular/common/http';
 import { WorkService } from 'src/app/service/work.service';
+import { CustomerService } from 'src/app/service/customer.service';
 
 @Component({
-  selector: 'app-work-status',
-  templateUrl: './work-status.component.html',
-  styleUrls: ['./work-status.component.scss']
+  selector: 'app-work-detail',
+  templateUrl: './work-detail.component.html',
+  styleUrls: ['./work-detail.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
-export class WorkStatusComponent implements OnInit {
+export class WorkDetailComponent implements OnInit {
 
   constructor(
     private service: WorkService,
+    private customerService: CustomerService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private toastr: ToastrService,
@@ -25,42 +30,32 @@ export class WorkStatusComponent implements OnInit {
   ) { }
 
   public modalRef!: BsModalRef;
-  public itemRef: any = null;
+
   public length: number = 0;
   public isProcess: boolean = false;
-  public idRef: any = null;
-
   public loading: boolean = true;
 
-  public start: number = 0;
-  public limit: number = 10;
-  public search: string = '';
+  public idRef: any = null;
+  public itemRef: any = null;
 
   ngOnInit(): void {
 
-    this.getItems();
-    
-  }
+    // this.getItems();
+   this.route.params.subscribe(params => {
+      this.service.get(params['id']).subscribe(res => {
 
+        if (res.length > 0) {
+          this.itemRef = res[0];
+          this.customerService.get(this.itemRef.customer_id).subscribe( cus =>{
+            this.itemRef.customer = cus[0];
+          });
+          console.log(this.itemRef);
+        } else {
+          console.log('error log 1');
+        }
+      });
+    });
 
-  async getItems() {
-    //  (params : { search? : string, status?: number, type?:number, start : number, limit : number })
-    await this.service.getAll({ search: this.search, start: this.start, limit: this.limit }).subscribe(
-      res => {
-        console.log(res);
-        
-        this.itemRef = res;
-        this.loading = false;
-      }
-    )
-
-  }
-
-  searchItems (search:string = '')
-  {
-    this.search = (search != '')? search : '';
-    this.loading = true;
-    this.getItems();
   }
 
   public async openModal_delete(template: TemplateRef<any>, id: any) {
@@ -78,7 +73,7 @@ export class WorkStatusComponent implements OnInit {
       if (res.status) {
         this.modalRef.hide();
         this.toastr.success('', 'ลบข้อมูลสำเร็จ สำเร็จ!!');
-        this.getItems();
+        // this.getItems();
         this.isProcess = false;
       } else {
         this.modalRef.hide();
@@ -93,28 +88,28 @@ export class WorkStatusComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  public pageEventChange(start:number = 0, limit:number = 10, search:string = '') {
+  public pageEventChange(start: number = 0, limit: number = 10, search: string = '') {
 
-		this.isProcess = true;
+    this.isProcess = true;
     this.loading = true;
 
-		// TODO : get all,
-		this.service.getAll( { search: search, start : start , limit : limit }).subscribe({			
+    // TODO : get all,
+    this.service.getAll({ search: search, start: start, limit: limit }).subscribe({
 
-			next :  result => {
-				this.itemRef = result;
-	  
-				// console.log(this.itemRef.data);		  
-				this.isProcess = false;
+      next: result => {
+        this.itemRef = result;
+
+        // console.log(this.itemRef.data);		  
+        this.isProcess = false;
         this.loading = false;
 
-			  } ,
-			error : refError => {
-				console.log(refError);
-				this.isProcess = false;
-			  }
-		})
-		
-	}
+      },
+      error: refError => {
+        console.log(refError);
+        this.isProcess = false;
+      }
+    })
+
+  }
 
 }

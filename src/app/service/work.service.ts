@@ -11,7 +11,7 @@ import { Observable, Subject, lastValueFrom } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkStatusService {
+export class WorkService {
 
   constructor(
     private http: HttpClient,

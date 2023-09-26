@@ -6,6 +6,8 @@ import { CostComponent } from './components/cost/cost.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { WorkStatusComponent } from './components/work/work-status/work-status.component';
+import { WorkAddComponent } from './components/work/work-add/work-add.component';
+import { WorkDetailComponent } from './components/work/work-detail/work-detail.component';
 
 const routes: Routes = [
 
@@ -14,6 +16,8 @@ const routes: Routes = [
 
   // { path: 'work', component: WorkComponent },
   { path: 'status', component: WorkStatusComponent },
+  { path: 'add', component: WorkAddComponent },
+  { path: 'detail/:id', component: WorkDetailComponent },
 
   { path: 'cost', component: CostComponent },
   { path: 'receipt', component: ReceiptComponent },

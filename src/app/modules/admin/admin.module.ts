@@ -12,6 +12,9 @@ import { CostComponent } from './components/cost/cost.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { WorkStatusComponent } from './components/work/work-status/work-status.component';
+import { WorkAddComponent } from './components/work/work-add/work-add.component';
+import { WorkEditComponent } from './components/work/work-edit/work-edit.component';
+import { WorkDetailComponent } from './components/work/work-detail/work-detail.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { WorkStatusComponent } from './components/work/work-status/work-status.c
     ReceiptComponent,
     PaymentComponent,
     WorkStatusComponent,
+    WorkAddComponent,
+    WorkEditComponent,
+    WorkDetailComponent,
   ],
   imports: [
     CommonModule,

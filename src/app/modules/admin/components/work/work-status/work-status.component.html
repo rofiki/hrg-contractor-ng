@@ -36,7 +36,7 @@
                             <div *ngIf="loading; then Loading else ShowData"></div>
                             <ng-template #Loading>
                                 <tr>
-                                    <td colspan="4"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
+                                    <td colspan="5"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
                                 </tr>
                             </ng-template>
 
@@ -44,7 +44,7 @@
                                 <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
                                 <ng-template #NotFound>
                                     <tr>
-                                        <td colspan="4">- ไม่พบข้อมูล -</td>
+                                        <td colspan="5">- ไม่พบข้อมูล -</td>
                                     </tr>
                                 </ng-template>
                                 <ng-template #listItem>
@@ -54,16 +54,16 @@
                                             <div class="">
                                                 <span *ngIf="item.work_status == 0"><span class="badge bg-warning text-dark">ยังไม่เสร็จ</span></span>
                                                 <span *ngIf="item.work_status == 1"><span class="badge bg-success">เสร็จแล้ว</span></span>
-                                                <a [routerLink]="['../detail/' + item.work_id]" class="" target="_blank"> {{item.work_code}}</a> </div>                                
+                                                <a [routerLink]="['../detail/' + item.work_id]"> {{item.work_code}}</a> </div>                                
                                         </td>
                                         <td class="fw-light">
                                             <div>{{item.work_place}} </div>
                                             <div class="small">
-                                                <span class="fw-bold">ระยะ</span> {{item.work_distance}} เมตร
+                                                <span class="fw-bold">ระยะ</span> {{item.work_distance | number: '1.0-0'}} เมตร
                                             </div>
                                         </td>
                                         <td class="fw-light">
-                                            {{item.work_job_start}} ถึง {{item.work_job_finish}}
+                                            {{item.work_job_start | date: 'dd/MM/yyyy'}} ถึง {{item.work_job_finish | date: 'dd/MM/yyyy'}}
                                         </td>    
                                         <td class="fw-light">
                                             <span class="badge bg-warning text-dark">ตั้งเบิกแล้ว/ยังไม่ได้รับเงิน</span>

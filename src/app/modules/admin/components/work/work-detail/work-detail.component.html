@@ -1,0 +1,219 @@
+<app-header></app-header>
+
+<div class="container-fluid main-body">
+    <div class="h3">
+        รายละเอียดงาน
+        <div class="text-muted h6 fw-normal">
+            <small>เลขที่ Work: {{itemRef?.work_code}}</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="btn-group" dropdown>
+                    <a class="btn btn-secondary btn-sm" type="button"><i class="fa-solid fa-arrow-left"></i> กลับ</a>
+                    <a class="btn btn-primary btn-sm" type="button">บันทึกรายจ่าย</a>
+                    <a class="btn btn-primary btn-sm" type="button">อับโหลดรูป</a>
+                    <a class="btn btn-primary btn-sm" type="button">ปิดงาน/ออกใบเสร็จ</a>
+                    <button id="button-animated" dropdownToggle type="button"
+                        class="btn btn-primary dropdown-toggle btn-sm" aria-controls="dropdown-animated"><i
+                            class="fa-solid fa-gear"></i></button>
+                    <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                        aria-labelledby="button-animated">
+                        <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa-solid fa-pen-to-square"></i>
+                                แก้ไข</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#"><i class="fa-regular fa-trash-can"></i>
+                                ลบ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header fw-bold">
+
+                        เลขที่ Work: TTTBB-YLA/PTN/23/FO/0260
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong><i class="fa-solid fa-bars-progress"></i> สถานะการดำเนินการ</strong>
+                                <p>
+                                    <span *ngIf="itemRef?.work_status == 0"><span class="badge bg-warning text-dark">ยังไม่เสร็จ</span></span>
+                                    <span *ngIf="itemRef?.work_status == 1"><span class="badge bg-success">เสร็จแล้ว</span></span>
+                                </p>
+                                <hr>
+                                <strong><i class="fa-solid fa-building"></i> บริษัทจ้างงาน</strong>
+                                <p class="text-muted">
+                                    {{itemRef?.customer?.name}} </p>
+                                <hr>
+                                <strong><i class="fa-solid fa-location-crosshairs"></i> สถานที่ทำงาน</strong>
+                                <p class="text-muted">{{itemRef?.work_place}}</p>
+                                <hr>
+                                <strong><i class="fas fa-circle-info mr-1"></i> รายละเอียด</strong>
+                                <p class="text-muted">{{itemRef?.work_detail}}</p>
+                                <hr>
+                                <strong><i class="fas fa-circle-info mr-1"></i> เอกสารเปิดงาน</strong>
+                                <p class="text-muted">
+                                    <i class="fa-solid fa-file-pdf"></i> เอกสารเปิดงาน:
+                                    <span class="badge badge-success mr-1 mt-1"><a
+                                            href="/hrg-dev/contractor/dist/upload/work_files/TTTBB-YLAPTN23FO0260_open_20230802101028.pdf"
+                                            class="text-light" target="_blank"><i class="fa-solid fa-paperclip"></i>
+                                            เปิดดู </a></span> <br>
+                                    <i class="fa-solid fa-file-pdf"></i> แบบแผนที่ร่าง:
+                                    <span class="badge badge-success mr-1 mt-1"><a
+                                            href="/hrg-dev/contractor/dist/upload/work_files/PTN000207 รพ.สะบ้าย้อย-ลำไพล2_other_20230801184345.pdf"
+                                            class="text-light" target="_blank"><i class="fa-solid fa-paperclip"></i>
+                                            เปิดดู </a></span>
+                                </p>
+
+                            </div>
+                            <div class="col-md-6">
+                                <strong><i class="fas fa-calendar-days mr-1"></i> วันที่รับงาน - วันที่เสร็จงาน</strong>
+                                <p class="text-muted">{{itemRef?.work_job_start | date: 'dd/MM/yyyy'}} ถึง {{itemRef?.work_job_finish | date: 'dd/MM/yyyy'}}</p>
+                                <hr>
+                                <strong><i class="fa-solid fa-file-invoice-dollar"></i> ราคางาน</strong>
+                                <p class="text-muted">{{itemRef?.work_price | number: '1.2-2'}} บาท</p>
+                                <hr>
+                                <strong><i class="fas fa-location-dot mr-1"></i> ต้นทาง</strong>
+                                <p class="text-muted">{{itemRef?.work_place_start}}<br><span class="small">{{itemRef?.work_place_start_latlong}}</span></p>
+                                <hr>
+                                <strong><i class="fas fa-location-dot mr-1"></i> ปลายทาง</strong>
+                                <p class="text-muted">{{itemRef?.work_place_end}}<br><span class="small">{{itemRef?.work_place_end_latlong}}</span></p>
+                                <hr>
+                                <strong><i class="fas fa-ruler mr-1"></i> ระยะทาง</strong>
+                                <p class="text-muted">{{itemRef?.work_distance | number: '1.0-0'}} เมตร</p>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <strong><i class="fa-regular fa-note-sticky mr-1"></i> หมายเหตุ</strong>
+                                <p class="text-muted"></p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header fw-bold">
+                        <i class="fas fa-hand-holding-dollar"></i> ต้นทุน/ค่าใช้จ่าย
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover border-bottom">
+                            <tbody>
+                                <tr>
+                                    <td class="border-right-0"><strong>ราคางาน</strong></td>
+                                    <td class="text-right text-primary"><strong>9,000.00 ฿</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>01/08/2023</strong> <span class="text-muted">ค่าแรง</span></td>
+                                    <td class="text-right text-danger"><strong>2,000.00 ฿</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>02/08/2023</strong> <span class="text-muted">ค่าแรง</span></td>
+                                    <td class="text-right text-danger"><strong>2,000.00 ฿</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>02/08/2023</strong> <span class="text-muted">VAT 3%</span></td>
+                                    <td class="text-right text-danger"><strong>270.00 ฿</strong></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="border-right-0"><strong>ค่าใช้จ่ายทั้งหมด</strong></td>
+                                    <td class="text-right text-danger"><strong>4,270.00 ฿</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-right-0"><strong>กำไรหลังหักค่าใช้จ่าย</strong></td>
+                                    <td class="text-right">
+                                        <strong class="float-right text-success">4,730.00 ฿</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header fw-bold">
+                            <i class="fa-solid fa-file-invoice"></i> ปิดงาน/ออกใบเสร็จ
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-sm table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th class="bg-custom-1" style="width:25%">เลขที่ใบเสร็จ</th>
+                                        <td style="width:25%"><strong>660043</strong></td>
+                                        <th class="bg-custom-1" style="width:25%">วันที่ออกใบเสร็จ</th>
+                                        <td style="width:25%">25/09/2023</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-custom-1">สถานะ</th>
+                                        <td>
+                                            <span class="badge badge-warning">ปิดงานแล้ว/ยังไม่ได้รับเงิน</span>
+                                        </td>
+                                        <th class="bg-custom-1">จำนวนเงิน</th>
+                                        <td>9,000.00</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-custom-1">เอกสารใบเสร็จ</th>
+                                        <td>
+                                            <span class="badge badge-success mr-1 mt-1"><a
+                                                    href="/hrg-dev/contractor/dist/upload/payment_files/workid(156)_receipt_20230926165343.pdf"
+                                                    class="text-light" target="_blank"><i
+                                                        class="fa-solid fa-paperclip"></i> เปิดดู </a></span>
+                                        </td>
+                                        <th class="bg-custom-1">VAT</th>
+                                        <td>
+                                            - ไม่มี - </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-custom-1">รายละเอียด</th>
+                                        <td colspan="3">งานลากคร่อมสาย OFC ARSS 12C.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <i class="fa-solid fa-money-check-dollar"></i> รายการเช็ค/หลักฐานการรับเงิน
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center">- ไม่มีข้อมูล -</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <ng-template #template>
+        <div class="modal-body text-center">
+            <p>ยืนยันลบข้อมูล</p>
+
+            <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+            <ng-template #showSaveLoading>
+                <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังประมวลผล...</p>
+            </ng-template>
+
+            <button type="button" class="btn btn-danger btn-sm me-1" [disabled]="(isProcess == true)"
+                (click)="confirm(idRef)">ลบ</button>
+            <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+                (click)="decline()">ยกเลิก</button>
+
+        </div>
+    </ng-template>
+    <app-footer></app-footer>
