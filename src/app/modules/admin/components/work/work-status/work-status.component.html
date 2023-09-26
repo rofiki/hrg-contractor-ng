@@ -15,6 +15,9 @@
             <div class="col-auto">
                 <button class="btn btn-primary btn-sm" type="button"  (click)="searchItems(searchValue.value);" ><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
             </div>
+            <div class="col-auto">
+                <button class="btn btn-primary btn-sm" type="button" > ค้นหาแบบละเอียด</button>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -51,8 +54,8 @@
                                             <div class="fw-bold me-2 small"> รายละเอียด </div>
                                             <div class="small">{{item.work_place}}</div>
                                             <div class="small">
-                                                <span class="fw-bold">ระยะ</span> {{item.work_distance}} เมตร
-                                                <span class="fw-bold">วันที่</span> {{item.work_job_start}} ถึง {{item.work_job_finish}}
+                                                <span class="fw-bold">ระยะ</span> {{item.work_distance | number: '1.0-0'}} เมตร
+                                                <span class="fw-bold">วันที่</span> {{ item.work_job_start | date: 'dd/MM/yyyy'}} ถึง {{item.work_job_finish | date: 'dd/MM/yyyy'}}
                                             </div>
                                             <div class="small">
                                                 <a [routerLink]="['../detail/' + item.work_id]" class="" target="_blank">เพิ่มเติม</a>

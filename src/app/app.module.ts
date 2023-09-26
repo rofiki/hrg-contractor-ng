@@ -16,7 +16,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ToastrModule } from 'ngx-toastr'; 
+import { ToastrModule } from 'ngx-toastr';
+// import { ThaiDatePipe, ThaifulldatePipe, ThaishortdatePipe, ThaishortmonthPipe, ThaiyearPipe } from './pipes/thai-date.pipe'; 
 
 
 @NgModule({
@@ -25,6 +26,12 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     ForgetPasswordComponent,
     NotFoundComponent,
+
+    // ThaiDatePipe,
+    // ThaifulldatePipe,
+    // ThaishortdatePipe,
+    // ThaishortmonthPipe,
+    // ThaiyearPipe
 
   ],
   imports: [
