@@ -17,6 +17,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
+
+//Datepicker
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { thLocale } from 'ngx-bootstrap/locale';
+ defineLocale('th', thLocale);
+
 // import { ThaiDatePipe, ThaifulldatePipe, ThaishortdatePipe, ThaishortmonthPipe, ThaiyearPipe } from './pipes/thai-date.pipe'; 
 
 
@@ -47,6 +53,8 @@ import { ToastrModule } from 'ngx-toastr';
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
     ModalModule.forRoot(),
+
+    // BsDatepickerModule.forRoot(),    
     
   ],
   providers: [],

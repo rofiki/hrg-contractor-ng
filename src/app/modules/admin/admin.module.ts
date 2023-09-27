@@ -15,6 +15,12 @@ import { WorkStatusComponent } from './components/work/work-status/work-status.c
 import { WorkAddComponent } from './components/work/work-add/work-add.component';
 import { WorkEditComponent } from './components/work/work-edit/work-edit.component';
 import { WorkDetailComponent } from './components/work/work-detail/work-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+// import { defineLocale } from 'ngx-bootstrap/chronos';
+import { deLocale } from 'ngx-bootstrap/locale';
 
 
 @NgModule({
@@ -37,8 +43,16 @@ import { WorkDetailComponent } from './components/work/work-detail/work-detail.c
     AdminRoutingModule,
     BsDropdownModule.forRoot(),
 
+    BsDatepickerModule.forRoot(),
+    // defineLocale,
+    // deLocale,
+
+    HttpClientModule,
+    ReactiveFormsModule,
+
+
   ],
-  exports:[
+  exports: [
     HeaderComponent,
     FooterComponent]
 })

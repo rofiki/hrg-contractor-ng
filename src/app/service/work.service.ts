@@ -17,7 +17,7 @@ export class WorkService {
     private http: HttpClient,
     private dbService: DbService,
     private baseService: BaseService,
-    private app: AppService
+    private app: AppService,
   ) { }
 
   private apiUrl: string = this.dbService.getServiceURL() + '/work';
@@ -44,6 +44,14 @@ export class WorkService {
 
   public delete(id: any): Observable<any> {
     return this.http.delete<any>(this.apiUrl + '/' + id);
+  }
+
+  public statusList() {
+    return [
+      {'value':'0','label':'กำลังดำเนินการ'},
+      {'value':'1','label':'เสร็จแล้ว'},
+      {'value':'2','label':'ยกเลิก'}
+    ];
   }
 
 }

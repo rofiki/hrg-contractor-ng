@@ -10,7 +10,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-customer-add',
   templateUrl: './customer-add.component.html',
-  styleUrls: ['./customer-add.component.scss']
+  styleUrls: ['./customer-add.component.scss'],
+
 })
 export class CustomerAddComponent implements OnInit {
 
@@ -20,7 +21,8 @@ export class CustomerAddComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private service: CustomerService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+
   ) { }
 
   public modalRef!: BsModalRef;
