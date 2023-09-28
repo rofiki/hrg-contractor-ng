@@ -1,21 +1,23 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { map, switchMap } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { AppService } from 'src/app/base/app.service';
 
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 import { HttpHeaders } from '@angular/common/http';
 import { WorkService } from 'src/app/service/work.service';
 
 @Component({
   selector: 'app-work-status',
   templateUrl: './work-status.component.html',
-  styleUrls: ['./work-status.component.scss']
+  styleUrls: ['./work-status.component.scss'],
 })
+
 export class WorkStatusComponent implements OnInit {
 
+  
   constructor(
     private service: WorkService,
     private route: ActivatedRoute,
@@ -38,24 +40,21 @@ export class WorkStatusComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.getItems();
     
   }
 
+  ngAfterViewInit() {}
 
   async getItems() {
     //  (params : { search? : string, status?: number, type?:number, start : number, limit : number })
     await this.service.getAll({ search: this.search, start: this.start, limit: this.limit }).subscribe(
       res => {
         console.log(res);
-        
         this.itemRef = res;
         this.loading = false;
-        if(this.modalRef) this.modalRef.hide();
       }
     )
-
   }
 
   searchItems (search:string = '')

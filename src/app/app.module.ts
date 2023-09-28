@@ -52,7 +52,7 @@ import { thLocale } from 'ngx-bootstrap/locale';
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
-    ModalModule.forRoot(),
+    // ModalModule.forRoot(),
 
     // BsDatepickerModule.forRoot(),    
     

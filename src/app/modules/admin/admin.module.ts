@@ -24,6 +24,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // import { defineLocale } from 'ngx-bootstrap/chronos';
 import { deLocale } from 'ngx-bootstrap/locale';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { deLocale } from 'ngx-bootstrap/locale';
 
     HttpClientModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
 
 
   ],

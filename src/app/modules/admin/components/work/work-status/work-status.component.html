@@ -21,7 +21,6 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary" (click)="loadingShow(tempLoading);">sdfsdf</button>
                 <div class="table-responsive">      
                     <table class="table table-striped border-top mt-2">
                         <thead>
@@ -35,12 +34,16 @@
                         </thead>
                         <tbody>
                             <div *ngIf="loading; then Loading else ShowData"></div>
+                            <ng-template #tempLoading>
+                                <tr class="bg-white text-center">
+                                    <td colspan="5"><div class="loading-spinner mb-2"></div><div>Loading</div></td>
+                                </tr>                                  
+                            </ng-template>
                             <ng-template #Loading>
                                 <tr>
                                     <td colspan="5"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td>
                                 </tr>
                             </ng-template>
-
                             <ng-template #ShowData>
                                 <div *ngIf="(itemRef.data.length <= 0) then NotFound else listItem"></div>
                                 <ng-template #NotFound>
@@ -131,12 +134,6 @@
     </div>
 </ng-template>
 
-<ng-template #tempLoading>
-    <div class="modal-body text-center">
-        <div class="loading-spinner mb-2"></div>
-         <div>Loading</div>
-      </div>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()"></button>
-</ng-template>
+
 
 <app-footer></app-footer>
