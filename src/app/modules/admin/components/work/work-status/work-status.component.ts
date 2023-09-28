@@ -36,6 +36,7 @@ export class WorkStatusComponent implements OnInit {
   public limit: number = 10;
   public search: string = '';
 
+
   ngOnInit(): void {
 
     this.getItems();
@@ -51,6 +52,7 @@ export class WorkStatusComponent implements OnInit {
         
         this.itemRef = res;
         this.loading = false;
+        if(this.modalRef) this.modalRef.hide();
       }
     )
 
@@ -116,5 +118,10 @@ export class WorkStatusComponent implements OnInit {
 		})
 		
 	}
+
+  public loadingShow(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    console.log(this.loading);
+  }
 
 }

@@ -6,7 +6,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import { WorkComponent } from './components/work/work.component';
 import { CostComponent } from './components/cost/cost.component';
 import { ReceiptComponent } from './components/receipt/receipt.component';
@@ -15,9 +17,9 @@ import { WorkStatusComponent } from './components/work/work-status/work-status.c
 import { WorkAddComponent } from './components/work/work-add/work-add.component';
 import { WorkEditComponent } from './components/work/work-edit/work-edit.component';
 import { WorkDetailComponent } from './components/work/work-detail/work-detail.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // import { defineLocale } from 'ngx-bootstrap/chronos';
 import { deLocale } from 'ngx-bootstrap/locale';

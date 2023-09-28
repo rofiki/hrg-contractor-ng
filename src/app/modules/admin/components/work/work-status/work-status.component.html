@@ -21,6 +21,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <button class="btn btn-primary" (click)="loadingShow(tempLoading);">sdfsdf</button>
                 <div class="table-responsive">      
                     <table class="table table-striped border-top mt-2">
                         <thead>
@@ -127,7 +128,15 @@
             (click)="confirm(idRef)">ลบ</button>
         <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
             (click)="decline()">ยกเลิก</button>
-
     </div>
 </ng-template>
+
+<ng-template #tempLoading>
+    <div class="modal-body text-center">
+        <div class="loading-spinner mb-2"></div>
+         <div>Loading</div>
+      </div>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()"></button>
+</ng-template>
+
 <app-footer></app-footer>
