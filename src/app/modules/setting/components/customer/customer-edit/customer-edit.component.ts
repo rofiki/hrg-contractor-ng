@@ -91,7 +91,7 @@ export class CustomerEditComponent implements OnInit {
         this.router.navigate(['/setting/customer']);
       } else {
         this.modalRef.hide();
-        this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+        this.toastr.error('แก้ไขข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
         this.EditForm.reset();
         this.isProcess = false;
       }

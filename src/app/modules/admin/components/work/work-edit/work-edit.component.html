@@ -1,1 +1,173 @@
-<p>work-edit works!</p>
+<app-header></app-header>
+
+<div class="container main-body">
+    <div class="h3">
+        งานรับเหมาพาดสายสื่อสาร
+        <div class="text-muted h6 fw-normal">
+            <small>แก้ไขข้อมูลงานรับเหมาพาดสายสื่อสาร</small>
+        </div>
+    </div>
+    <div class="bg-white border mt-4 p-4 shadow" *ngIf="itemRef">
+        <form [formGroup]="EditForm" (ngSubmit)="onSubmit(template)" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6  pe-4">
+
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">เลขที่ Work <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="work_code" [(ngModel)]="itemRef.work_code">
+                        <div
+                            *ngIf="(EditForm.controls['work_code'].hasError('required') && (EditForm.get('work_code')?.dirty || EditForm.get('work_code')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> เลขที่ Work
+                                ห้ามว่าง</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">ผู้จ้างงาน (ลูกค้า) <span
+                                class="text-danger">*</span></label>
+
+                                <select *ngIf="cusItems && cusItems.data" name="customer_id" id="customer_id" class="form-control" formControlName="customer_id" [(ngModel)]="itemRef.customer_id">
+                                    <option value="">- เลือก -</option>
+                                    <ng-container *ngFor="let element of cusItems.data">
+                                        <option [value]="element.id"> {{ element.name }}</option>
+                                    </ng-container>
+                                </select>          
+                        <div
+                            *ngIf="(EditForm.controls['customer_id'].hasError('required') && (EditForm.get('customer_id')?.dirty || EditForm.get('customer_id')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> กรุณาเลือก ผู้จ้างงาน (ลูกค้า)</small>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="">ปีที่รับงาน</label>
+                            <select id="work_year" name="work_year" class="form-control" formControlName="work_year" [(ngModel)]="itemRef.work_year">
+                                <ng-container *ngFor="let year of yearList">
+                                    <option [value]="year.value"> {{ year.label }}</option>
+                                </ng-container>
+                            </select>                        
+                            
+                        </div>
+                        <div class="col-md-9">
+                            <label for="">สถานที่ </label>
+                            <input type="text" class="form-control" id="work_place" name="work_place" formControlName="work_place" [(ngModel)]="itemRef.work_place">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">รายละเอียด </label>
+                        <input type="text" class="form-control" id="" formControlName="work_detail" [(ngModel)]="itemRef.work_detail">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="">วันที่รับงาน <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.work_job_start">
+                            <div
+                                *ngIf="(EditForm.controls['work_job_start'].hasError('required') && (EditForm.get('work_job_start')?.dirty || EditForm.get('work_job_start')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i> วันที่รับงาน ห้ามว่าง</small>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">วันที่เสร็จงาน </label>
+                            <input type="text" class="form-control" formControlName="work_job_finish" bsDatepicker  [(ngModel)]="itemRef.work_job_finish">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="inputWorkYear">ต้นทาง </label>
+                            <input type="text" class="form-control" formControlName="work_place_start" [(ngModel)]="itemRef.work_place_start">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputWorkPlace">พิกัดต้นทาง </label>
+                            <input type="text" class="form-control" formControlName="work_place_start_latlong" [(ngModel)]="itemRef.work_place_start_latlong">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="inputWorkYear">ปลายทาง </label>
+                            <input type="text" class="form-control" formControlName="work_place_end" [(ngModel)]="itemRef.work_place_end">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputWorkPlace">พิกัดปลายทาง </label>
+                            <input type="text" class="form-control" formControlName="work_place_end_latlong" [(ngModel)]="itemRef.work_place_end_latlong">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 border-start ps-4">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="inputWorkYear">ระยะทาง (เมตร) </label>
+                            <input type="text" class="form-control" formControlName="work_distance" [(ngModel)]="itemRef.work_distance">
+                            <div
+                                *ngIf="(EditForm.controls['work_distance'].hasError('pattern') && (EditForm.get('work_distance')?.dirty || EditForm.get('work_distance')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
+                                    ตัวเลขเท่านั้น</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputWorkPlace">ราคางาน (บาท) </label>
+                            <input type="text" class="form-control" formControlName="work_price" [(ngModel)]="itemRef.work_price">
+                            <div
+                                *ngIf="(EditForm.controls['work_price'].hasError('pattern') && (EditForm.get('work_price')?.dirty || EditForm.get('work_price')?.touched))">
+                                <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
+                                    ตัวเลขเท่านั้น</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">หมายเหตุ </label>
+                        <input type="text" class="form-control" formControlName="work_note" [(ngModel)]="itemRef.work_note">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">เอกสารเปิดงาน </label>
+                        <input type="file" class="form-control file-upload" onchange="console.log(event.target.files)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">แบบงาน </label>
+                        <input type="file" class="form-control file-upload" onchange="console.log(event.target.files)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">สถานะ </label>
+                        <select class="form-control" formControlName="work_status" [(ngModel)]="itemRef.work_status">
+                            <ng-container *ngFor="let status of statusList">
+                                <option [value]="status.value">{{status.label}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="hidden" formControlName="token" [value]="token">
+                    <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="EditForm.invalid"><i
+                            class="fa-regular fa-floppy-disk"></i> บันทึก </button>
+                    <button class="btn btn-secondary btn-sm " [routerLink]="['/work/status']"><i
+                            class="fa-solid fa-arrow-left"></i> กลับ</button>
+                </div>
+
+
+            </div>
+        </form>
+
+    </div>
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันเพื่มข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)"
+            (click)="confirm()">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+            (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
+<app-footer></app-footer>

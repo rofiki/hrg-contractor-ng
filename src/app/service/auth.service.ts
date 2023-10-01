@@ -39,6 +39,10 @@ export class AuthService {
     return this.http.get<any>(this.dbService.getServiceURL() + '/users/' + id);
   }
 
+  getIdByToken(token:any){
+    return this.http.get<any>(this.dbService.getServiceURL() + '/users/token/' + token);
+  }
+
 
   IsloggedIn(): any {
 

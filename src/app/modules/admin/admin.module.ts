@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, Pipe } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -51,11 +51,12 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     // deLocale,
 
     HttpClientModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
     ModalModule.forRoot(),
 
 
   ],
+  providers:[DatePipe],
   exports: [
     HeaderComponent,
     FooterComponent]

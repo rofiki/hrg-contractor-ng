@@ -143,7 +143,7 @@
                         <select class="form-control" formControlName="work_status">
                             <option value="">- เลือก -</option>
                             <ng-container *ngFor="let status of statusList">
-                                <option value="2016">{{status.label}}</option>
+                                <option value="{{status.value}}">{{status.label}}</option>
                             </ng-container>
                         </select>
                         <div
@@ -153,6 +153,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <input type="hidden" formControlName="token">
                     <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="createForm.invalid"><i
                             class="fa-regular fa-floppy-disk"></i> บันทึก </button>
                     <button class="btn btn-secondary btn-sm " [routerLink]="['/work/status']"><i

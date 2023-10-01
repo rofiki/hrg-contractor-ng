@@ -31,8 +31,8 @@ export class WorkAddComponent implements OnInit {
 
   public modalRef!: BsModalRef;
   public createForm!: FormGroup;
+  public token = localStorage.getItem('token');
 
-  public id:any;
   public items: any = null;
   public isProcess: boolean = false;
   public cusItems: any = null;
@@ -57,6 +57,7 @@ export class WorkAddComponent implements OnInit {
       work_price: this.fb.control('', [Validators.pattern("^[0-9]*$")]),
       work_note: this.fb.control('', []),
       work_status: this.fb.control('', [Validators.required]),
+      token: this.fb.control(this.token, []),
     });
 
     this.customerService.getAll({start: 0, limit: 100}).subscribe(cus => {
@@ -74,20 +75,20 @@ export class WorkAddComponent implements OnInit {
 
     let params = this.createForm.value;
     this.isProcess = true;
-
     await this.service.create(params).subscribe(res => {
 
       if(res.status){
         this.modalRef.hide();
-        this.toastr.success(res.data.name, 'เพิ่มข้อมูลบริษัทผู้จ้าง (ลูกค้า) สำเร็จ!!');
-        this.router.navigate(['/setting/customer']);
+        this.toastr.success(res.data.work_code, 'เพิ่มข้อมูลสำเร็จ!!');
+        this.router.navigate(['/work/detail/' + res.data.work_id]);
+        //http://localhost:4200/work/detail/166
       }else{
         this.modalRef.hide();
         this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
         this.createForm.reset();
         this.isProcess = false;
       }
-      //console.log(res);
+      console.log(res);
     });
 
   }
