@@ -61,7 +61,12 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="">วันที่รับงาน <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.work_job_start">
+                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.job_start">
+                            <!-- <input type="date" class="form-control" formControlName="work_job_start" bsDatepicker [value]="dateValue | date: 'dd/MM/yyyy'"> -->
+
+                            <!-- <input type="text" class="form-control" [value]="itemRef.job_start | date: 'dd/MM/yyyy'" >
+                            <em #dp="bsDatepicker" bsDatepicker class="fa fa-search" [(bsValue)]="dateValue"></em> -->
+
                             <div
                                 *ngIf="(EditForm.controls['work_job_start'].hasError('required') && (EditForm.get('work_job_start')?.dirty || EditForm.get('work_job_start')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i> วันที่รับงาน ห้ามว่าง</small>
@@ -70,7 +75,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">วันที่เสร็จงาน </label>
-                            <input type="text" class="form-control" formControlName="work_job_finish" bsDatepicker  [(ngModel)]="itemRef.work_job_finish">
+                            <input type="text" class="form-control" formControlName="work_job_finish" bsDatepicker  [(ngModel)]="itemRef.job_finish">
                         </div>
                     </div>
 
@@ -141,7 +146,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <input type="hidden" formControlName="token" [value]="token">
+                    <input type="text" formControlName="token" [(ngModel)]="token">
+                    <input type="text" formControlName="work_id" [(ngModel)]="itemRef.work_id">{{itemRef.work_id}}
                     <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="EditForm.invalid"><i
                             class="fa-regular fa-floppy-disk"></i> บันทึก </button>
                     <button class="btn btn-secondary btn-sm " [routerLink]="['/work/status']"><i
@@ -156,7 +162,7 @@
 </div>
 <ng-template #template>
     <div class="modal-body text-center">
-        <p>ยืนยันเพื่มข้อมูล</p>
+        <p>ยืนยันแก้ไขข้อมูล</p>
 
         <div *ngIf="(isProcess == true) then showSaveLoading"></div>
         <ng-template #showSaveLoading>

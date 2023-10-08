@@ -48,6 +48,7 @@ export class WorkService {
   }
 
   public update(params: {}): Observable<any> {
+    console.log('param = ', params);
     return this.http.put(this.apiUrl + '/', params);
   }
 
