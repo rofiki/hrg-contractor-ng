@@ -52,9 +52,9 @@ export class WorkEditComponent implements OnInit {
   // public date_iso:any;
   // public bsValue = new Date();
 
-    public dateValue = new Date();
+    public dateValue :any;
 
-  
+    // "2023-10-09T09:14:20.000000Z"
 
   ngOnInit() {
 
@@ -63,7 +63,7 @@ export class WorkEditComponent implements OnInit {
     // console.log(this.date1);
     // console.log(this.date_iso);
 
-    // this.dateValue =new Date('2019-02-01T14:14:00');
+    // this.dateValue =new Date('2023-10-09T09:14:20.000000Z');
 
     this.localeService.use('th');
 
@@ -101,7 +101,9 @@ export class WorkEditComponent implements OnInit {
           this.itemRef.job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
           this.itemRef.job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
 
-          this.dateValue =new Date(res[0].work_job_start);
+          this.dateValue =new Date("2023-10-23T09:14:20.000000Z");
+
+          console.log(res);
 
         } else {
           this.editForm = false;

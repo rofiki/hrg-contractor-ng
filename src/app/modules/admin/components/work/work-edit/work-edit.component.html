@@ -61,7 +61,11 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="">วันที่รับงาน <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.job_start">
+                            <!-- x{{dateValue | date: 'dd/MM/yyyy'}}x -->
+                            <!-- <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker> -->
+                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.work_job_start">{{itemRef.work_job_start}}
+                                
+
                             <!-- <input type="date" class="form-control" formControlName="work_job_start" bsDatepicker [value]="dateValue | date: 'dd/MM/yyyy'"> -->
 
                             <!-- <input type="text" class="form-control" [value]="itemRef.job_start | date: 'dd/MM/yyyy'" >
