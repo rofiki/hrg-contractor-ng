@@ -98,12 +98,14 @@ export class WorkEditComponent implements OnInit {
 
           this.editForm = true;
           this.itemRef = res[0];
-          this.itemRef.job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
-          this.itemRef.job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
+          this.itemRef.work_job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
+          this.itemRef.work_job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
 
-          this.dateValue =new Date("2023-10-23T09:14:20.000000Z");
+          // this.dateValue =new Date("2023-10-23T09:14:20.000000Z");
+          this.dateValue =new Date(this.itemRef.work_job_start);
 
           console.log(res);
+          console.log('dateValue=',this.dateValue);
 
         } else {
           this.editForm = false;
@@ -121,6 +123,23 @@ export class WorkEditComponent implements OnInit {
     let value = this.EditForm.value;
     this.isProcess = true;
 
+
+    // let dateInput = "2019/15/15"; // YYYY/MM/DD format
+    let dateInput = "15/12/2019"; // YYYY/MM/DD format
+
+    let dateObj = new Date(dateInput);
+    
+    console.log('dateObj',dateObj); // Invalid Date
+
+
+
+    console.log('value=',value.work_job_start);
+
+    value.work_job_start = this.datePipe.transform(value.work_job_start, 'yyyy-MM-dd hh:mm:ss');
+    value.work_job_finish = this.datePipe.transform(value.work_job_finish, 'yyyy-MM-dd hh:mm:ss');
+
+    console.log('value_modify=',value.work_job_start);
+
     await this.service.update(value).subscribe(res => {
       if (res.status) {
         this.modalRef.hide();
@@ -132,7 +151,7 @@ export class WorkEditComponent implements OnInit {
         // this.EditForm.reset();
         this.isProcess = false;
       }
-      // console.log('update res=', res);
+       console.log('update res=', res);
     });
 
   }
