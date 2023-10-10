@@ -61,17 +61,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="">วันที่รับงาน <span class="text-danger">*</span></label>
-                            <!-- x{{dateValue | date: 'dd/MM/yyyy'}}x -->
-                            <!-- <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker> -->
-                            <input type="text" class="form-control" formControlName="work_job_start" bsDatepicker [(ngModel)]="itemRef.work_job_start">
-                            <!-- {{itemRef.work_job_start}}<br> -->
-                            <!-- {{itemRef.work_job_start | date: 'dd/MM/yyyy'}} -->
-                                
-
-                            <!-- <input type="date" class="form-control" formControlName="work_job_start" bsDatepicker [value]="dateValue | date: 'dd/MM/yyyy'"> -->
-
-                            <!-- <input type="text" class="form-control" [value]="itemRef.job_start | date: 'dd/MM/yyyy'" >
-                            <em #dp="bsDatepicker" bsDatepicker class="fa fa-search" [(bsValue)]="dateValue"></em> -->
+                            <input type="text" class="form-control" bsDatepicker formControlName="work_job_start">
 
                             <div
                                 *ngIf="(EditForm.controls['work_job_start'].hasError('required') && (EditForm.get('work_job_start')?.dirty || EditForm.get('work_job_start')?.touched))">
@@ -81,7 +71,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">วันที่เสร็จงาน </label>
-                            <input type="text" class="form-control" formControlName="work_job_finish" bsDatepicker  [(ngModel)]="itemRef.work_job_finish">
+                            <input type="text" class="form-control" bsDatepicker formControlName="work_job_finish">
                         </div>
                     </div>
 

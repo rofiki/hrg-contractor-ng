@@ -48,22 +48,7 @@ export class WorkEditComponent implements OnInit {
   public statusList = this.service.statusList();
   public yearList = this.service.yearList();
 
-  // public date1:any;
-  // public date_iso:any;
-  // public bsValue = new Date();
-
-    public dateValue :any;
-
-    // "2023-10-09T09:14:20.000000Z"
-
   ngOnInit() {
-
-    // this.date1 = new Date('2019-02-01T14:14:00');
-    // this.date_iso = this.date1.toISOString()
-    // console.log(this.date1);
-    // console.log(this.date_iso);
-
-    // this.dateValue =new Date('2023-10-09T09:14:20.000000Z');
 
     this.localeService.use('th');
 
@@ -89,7 +74,6 @@ export class WorkEditComponent implements OnInit {
       work_status: this.fb.control(null, []),
       token: this.fb.control(null, []),
       work_id: this.fb.control(null, []),
-
       
     });
 
@@ -98,14 +82,16 @@ export class WorkEditComponent implements OnInit {
 
           this.editForm = true;
           this.itemRef = res[0];
-          this.itemRef.work_job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
-          this.itemRef.work_job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
+          // this.itemRef.work_job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
+          // this.itemRef.work_job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
 
-          // this.dateValue =new Date("2023-10-23T09:14:20.000000Z");
-          this.dateValue =new Date(this.itemRef.work_job_start);
-
+          // Datepicker ไม่สามารถใช้กับ formControlName ได้ เลยต้องมาใช้ patchValue() แทน
+          // เพื่อให้ validate ได้
+          this.EditForm.patchValue({
+            work_job_start: new Date(this.itemRef.work_job_start),
+            work_job_finish: new Date(this.itemRef.work_job_finish),
+          });
           console.log(res);
-          console.log('dateValue=',this.dateValue);
 
         } else {
           this.editForm = false;
@@ -123,22 +109,9 @@ export class WorkEditComponent implements OnInit {
     let value = this.EditForm.value;
     this.isProcess = true;
 
-
-    // let dateInput = "2019/15/15"; // YYYY/MM/DD format
-    let dateInput = "15/12/2019"; // YYYY/MM/DD format
-
-    let dateObj = new Date(dateInput);
-    
-    console.log('dateObj',dateObj); // Invalid Date
-
-
-
-    console.log('value=',value.work_job_start);
-
+    // แปลง date format ก่อน update
     value.work_job_start = this.datePipe.transform(value.work_job_start, 'yyyy-MM-dd hh:mm:ss');
     value.work_job_finish = this.datePipe.transform(value.work_job_finish, 'yyyy-MM-dd hh:mm:ss');
-
-    console.log('value_modify=',value.work_job_start);
 
     await this.service.update(value).subscribe(res => {
       if (res.status) {
