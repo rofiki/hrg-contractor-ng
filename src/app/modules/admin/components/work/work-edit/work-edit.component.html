@@ -146,7 +146,7 @@
                     <input type="hidden" formControlName="work_id" [(ngModel)]="itemRef.work_id">
                     <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="EditForm.invalid"><i
                             class="fa-regular fa-floppy-disk"></i> บันทึก </button>
-                    <button class="btn btn-secondary btn-sm " [routerLink]="['/work/status']"><i
+                    <button class="btn btn-secondary btn-sm " [routerLink]="['/work/detail/'+ itemRef.work_id]"><i
                             class="fa-solid fa-arrow-left"></i> กลับ</button>
                 </div>
 

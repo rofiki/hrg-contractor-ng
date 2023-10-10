@@ -10,7 +10,7 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 
 import { HttpHeaders } from '@angular/common/http';
 import { WorkService } from 'src/app/service/work.service';
-import { CustomerService } from 'src/app/service/customer.service';
+// import { CustomerService } from 'src/app/service/customer.service';
 
 @Component({
   selector: 'app-work-detail',
@@ -22,7 +22,7 @@ export class WorkDetailComponent implements OnInit {
 
   constructor(
     private service: WorkService,
-    private customerService: CustomerService,
+    // private customerService: CustomerService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private toastr: ToastrService,
@@ -40,15 +40,11 @@ export class WorkDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.getItems();
-   this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.service.get(params['id']).subscribe(res => {
 
         if (res.length > 0) {
           this.itemRef = res[0];
-          this.customerService.get(this.itemRef.customer_id).subscribe( cus =>{
-            this.itemRef.customer = cus[0];
-          });
           console.log(this.itemRef);
         } else {
           console.log('error log 1');
@@ -111,5 +107,9 @@ export class WorkDetailComponent implements OnInit {
     })
 
   }
+
+  // btn_back(search: string = '', start: number = 0, limit: number = 10) {
+  //   console.log({ search: search, start: start, limit: limit });
+  // }
 
 }
