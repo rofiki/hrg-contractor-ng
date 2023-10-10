@@ -1,0 +1,80 @@
+<div class="card mb-2">
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit(template)" enctype="multipart/form-data">
+        <!-- <div class="card-header">
+        header
+    </div> -->
+        <div class="card-body" style="background-color: #f5f5f5;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">หมวดค่าใช้จ่าย <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="costtype_id">
+                        <div
+                            *ngIf="(createForm.controls['costtype_id'].hasError('required') && (createForm.get('costtype_id')?.dirty || createForm.get('costtype_id')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> หมวดค่าใช้จ่าย
+                                ห้ามว่าง</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">วันที่ <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="cost_date">
+                        <div
+                            *ngIf="(createForm.controls['cost_date'].hasError('required') && (createForm.get('cost_date')?.dirty || createForm.get('cost_date')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> วันที่
+                                ห้ามว่าง</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">รายละเอียด</label>
+                        <input type="text" class="form-control" id="" formControlName="cost_detail">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="" class="form-label m-0">จำนวนเงิน <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="" formControlName="cost_amount">
+                        <div
+                            *ngIf="(createForm.controls['cost_amount'].hasError('required') && (createForm.get('cost_amount')?.dirty || createForm.get('cost_amount')?.touched))">
+                            <small class="message-error"><i class="fa-solid fa-square-xmark"></i> จำนวนเงิน
+                                ห้ามว่าง</small>
+                        </div>
+                        <div
+                        *ngIf="(createForm.controls['cost_amount'].hasError('pattern') && (createForm.get('cost_amount')?.dirty || createForm.get('cost_amount')?.touched))">
+                        <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
+                            ตัวเลขเท่านั้น</small>
+                    </div>                        
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="hidden" formControlName="token">
+                    <input type="hidden" formControlName="work_id">
+                        <button type="submit" class="btn btn-primary btn-sm float-end"  [disabled]="createForm.invalid">
+                            <i class="fa-regular fa-floppy-disk"></i> บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันเพื่มข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังบันทึก...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-primary btn-sm me-1" [disabled]="(isProcess == true)"
+            (click)="confirm()">ยืนยัน</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+            (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>

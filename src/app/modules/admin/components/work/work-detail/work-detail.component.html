@@ -31,13 +31,14 @@
         </div>
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-header fw-bold">
 
                         เลขที่ Work: {{itemRef?.work_code}}
 
                     </div>
+                    
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -103,43 +104,21 @@
 
 
 
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card mb-4">
                     <div class="card-header fw-bold">
-                        <i class="fas fa-hand-holding-dollar"></i> ต้นทุน/ค่าใช้จ่าย <a class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> เพิ่ม</a>
+                        <i class="fas fa-hand-holding-dollar"></i> ต้นทุน/ค่าใช้จ่าย 
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover border-bottom">
-                            <tbody>
-                                <tr>
-                                    <td class="border-right-0"><strong>ราคางาน</strong></td>
-                                    <td class="text-right text-primary"><strong>9,000.00 ฿</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>01/08/2023</strong> <span class="text-muted">ค่าแรง</span></td>
-                                    <td class="text-right text-danger"><strong>2,000.00 ฿</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>02/08/2023</strong> <span class="text-muted">ค่าแรง</span></td>
-                                    <td class="text-right text-danger"><strong>2,000.00 ฿</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>02/08/2023</strong> <span class="text-muted">VAT 3%</span></td>
-                                    <td class="text-right text-danger"><strong>270.00 ฿</strong></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="border-right-0"><strong>ค่าใช้จ่ายทั้งหมด</strong></td>
-                                    <td class="text-right text-danger"><strong>4,270.00 ฿</strong></td>
-                                </tr>
-                                <tr>
-                                    <td class="border-right-0"><strong>กำไรหลังหักค่าใช้จ่าย</strong></td>
-                                    <td class="text-right">
-                                        <strong class="float-right text-success">4,730.00 ฿</strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <app-cost-list [step]="5"></app-cost-list>
+                        <div *ngIf="openFormCreateCost;">
+                            <app-cost-add></app-cost-add>
+                            <button class="btn btn-danger btn-sm" (click)="FormCreateCost(false)"><i class="fa-solid fa-xmark"></i> ปิดฟอร์ม</button>
+                        </div>
+                        <div *ngIf="!openFormCreateCost;">
+                            <button class="btn btn-primary btn-sm" (click)="FormCreateCost(true)"><i class="fa-solid fa-plus"></i> เพิ่มค่าใช้จ่าย</button>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -200,7 +179,7 @@
 
         </div>
     </div>
-    <ng-template #template>
+    <!-- <ng-template #template>
         <div class="modal-body text-center">
             <p>ยืนยันลบข้อมูล</p>
 
@@ -215,5 +194,5 @@
                 (click)="decline()">ยกเลิก</button>
 
         </div>
-    </ng-template>
+    </ng-template> -->
     <app-footer></app-footer>

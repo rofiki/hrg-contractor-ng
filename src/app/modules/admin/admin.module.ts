@@ -25,6 +25,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { deLocale } from 'ngx-bootstrap/locale';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CostAddComponent } from './components/cost/cost-add/cost-add.component';
+import { CostEditComponent } from './components/cost/cost-edit/cost-edit.component';
+import { CostListComponent } from './components/cost/cost-list/cost-list.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     WorkAddComponent,
     WorkEditComponent,
     WorkDetailComponent,
+    CostAddComponent,
+    CostEditComponent,
+    CostListComponent,
   ],
   imports: [
     CommonModule,

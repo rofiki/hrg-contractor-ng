@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { map, switchMap } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { AppService } from 'src/app/base/app.service';
@@ -21,6 +21,7 @@ import { WorkService } from 'src/app/service/work.service';
 export class WorkDetailComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private service: WorkService,
     // private customerService: CustomerService,
     private route: ActivatedRoute,
@@ -38,6 +39,11 @@ export class WorkDetailComponent implements OnInit {
   public idRef: any = null;
   public itemRef: any = null;
 
+  public openFormCreateCost: boolean = false;
+
+  // for test
+
+
   ngOnInit(): void {
 
     this.route.params.subscribe(params => {
@@ -45,9 +51,9 @@ export class WorkDetailComponent implements OnInit {
 
         if (res.length > 0) {
           this.itemRef = res[0];
-          console.log(this.itemRef);
+          console.log('itemRef',this.itemRef);
         } else {
-          console.log('error log 1');
+          this.router.navigate(['/work/NotFound']);
         }
       });
     });
@@ -68,12 +74,12 @@ export class WorkDetailComponent implements OnInit {
     this.service.delete(id).subscribe(res => {
       if (res.status) {
         this.modalRef.hide();
-        this.toastr.success('', 'ลบข้อมูลสำเร็จ สำเร็จ!!');
+        this.toastr.success(res.message);
         // this.getItems();
         this.isProcess = false;
       } else {
         this.modalRef.hide();
-        this.toastr.error('ลบข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+        this.toastr.error(res.message);
         this.isProcess = false;
       }
     });
@@ -107,6 +113,12 @@ export class WorkDetailComponent implements OnInit {
     })
 
   }
+
+  public FormCreateCost (open:boolean){
+    this.openFormCreateCost = open;
+  }
+
+
 
   // btn_back(search: string = '', start: number = 0, limit: number = 10) {
   //   console.log({ search: search, start: start, limit: limit });

@@ -81,7 +81,6 @@ export class WorkAddComponent implements OnInit {
         this.modalRef.hide();
         this.toastr.success(res.data.work_code, 'เพิ่มข้อมูลสำเร็จ!!');
         this.router.navigate(['/work/detail/' + res.data.work_id]);
-        //http://localhost:4200/work/detail/166
       }else{
         this.modalRef.hide();
         this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
