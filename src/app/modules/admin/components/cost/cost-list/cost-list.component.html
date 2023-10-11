@@ -16,17 +16,31 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of itemRef?.data">
-                <td class="border-right-0 ">{{item.cost_date | date: 'dd/MM/yyyy'}} <small class="text-muted">{{item.name}}</small></td>
-                <td class="text-end text-danger ">{{item.cost_amount | number: '1.2-2'}}</td>
-                <td class="text-secondary ">
-                    <a class="text-muted">
-                        <i class="fa-solid fa-pen p-1"></i>
-                    </a>
-                    <a href="javascript:void(0)" (click)="openModal_delete( template, item.cost_id )" class="text-muted" >
-                        <i class="fa-solid fa-trash p-1"></i>
-                    </a>
+            <tr *ngFor="let item of itemRef?.data" class="">
+                <td colspan="3" *ngIf="(item.cost_id == idEditRef && (openFormEdit))">
+                    <div class="row">
+                        <div class="col-12">แก้ไขค่าใช้จ่ายวันที่ <strong>{{item.cost_date | date: 'dd/MM/yyyy'}}</strong></div>
+                        <app-cost-edit 
+                            [costId]="item.cost_id" 
+                            (EvenFrom_CostEdit_CloseFormEdit)="EvenFrom_CostEdit_CloseFormEdit()"
+                            (reloadData)="reloadData()" >
+                        </app-cost-edit>
+                    </div>
                 </td>
+                <td colspan="3" *ngIf="(!(openFormEdit))">
+                    <div class="row">
+                        <div class="col-6 ">{{item.cost_date | date: 'dd/MM/yyyy'}} <small class="text-muted">{{item.name}}</small></div>
+                        <div class="col-6  text-end text-danger">
+                            {{item.cost_amount | number: '1.2-2'}}
+                            <a class="text-muted" href="javascript:void(0)" (click)="FormEdit(item.cost_id)">
+                                <i class="fa-solid fa-pen p-1"></i>
+                            </a>
+                            <a href="javascript:void(0)" (click)="openModal_delete( template, item.cost_id )" class="text-muted" >
+                                <i class="fa-solid fa-trash p-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </td>                
             </tr>
             <tr class="">
                 <td><strong>ค่าใช้จ่ายทั้งหมด</strong></td>

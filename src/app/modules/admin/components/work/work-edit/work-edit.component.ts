@@ -35,6 +35,7 @@ export class WorkEditComponent implements OnInit {
 
   public modalRef!: BsModalRef;
   public EditForm!: FormGroup;
+  public numRegex = /^-?\d*[.,]?\d{0,2}$/;
 
   public token = localStorage.getItem('token');
   public id: any = this.route.snapshot.paramMap.get('id');
@@ -68,8 +69,8 @@ export class WorkEditComponent implements OnInit {
       work_place_start_latlong: this.fb.control(null, []),
       work_place_end: this.fb.control(null, []),
       work_place_end_latlong: this.fb.control(null, []),
-      work_distance: this.fb.control(null, [Validators.pattern("^[0-9]*$")]),
-      work_price: this.fb.control(null, [Validators.pattern("^[0-9]*$")]),
+      work_distance: this.fb.control(null, [Validators.pattern(this.numRegex)]),
+      work_price: this.fb.control(null, [Validators.pattern(this.numRegex)]),
       work_note: this.fb.control(null, []),
       work_status: this.fb.control(null, []),
       token: this.fb.control(null, []),
@@ -82,11 +83,8 @@ export class WorkEditComponent implements OnInit {
 
           this.editForm = true;
           this.itemRef = res[0];
-          // this.itemRef.work_job_start = this.datePipe.transform(res[0].work_job_start, 'dd/MM/yyyy');
-          // this.itemRef.work_job_finish = this.datePipe.transform(res[0].work_job_finish, 'dd/MM/yyyy');
 
-          // Datepicker ไม่สามารถใช้กับ formControlName ได้ เลยต้องมาใช้ patchValue() แทน
-          // เพื่อให้ validate ได้
+          // Datepicker ไม่สามารถใช้กับ formControlName ได้ เลยต้องมาใช้ patchValue() แทน เพื่อให้ validate ได้
           this.EditForm.patchValue({
             work_job_start: new Date(this.itemRef.work_job_start),
             work_job_finish: new Date(this.itemRef.work_job_finish),

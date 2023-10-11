@@ -40,12 +40,11 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label for="">ปีที่รับงาน</label>
-                            <select id="work_year" name="work_year" class="form-control" formControlName="work_year" [(ngModel)]="itemRef.work_year">
+                            <select class="form-control" formControlName="work_year" [(ngModel)]="itemRef.work_year">
                                 <ng-container *ngFor="let year of yearList">
-                                    <option [value]="year.value"> {{ year.label }}</option>
+                                    <option [value]="year.value">{{year.label}}</option>
                                 </ng-container>
-                            </select>                        
-                            
+                            </select>
                         </div>
                         <div class="col-md-9">
                             <label for="">สถานที่ </label>
@@ -103,7 +102,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="inputWorkYear">ระยะทาง (เมตร) </label>
-                            <input type="text" class="form-control" formControlName="work_distance" [(ngModel)]="itemRef.work_distance">
+                            <input type="text" class="form-control text-end" formControlName="work_distance" [(ngModel)]="itemRef.work_distance">
                             <div
                                 *ngIf="(EditForm.controls['work_distance'].hasError('pattern') && (EditForm.get('work_distance')?.dirty || EditForm.get('work_distance')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
@@ -112,7 +111,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputWorkPlace">ราคางาน (บาท) </label>
-                            <input type="text" class="form-control" formControlName="work_price" [(ngModel)]="itemRef.work_price">
+                            <input type="text" class="form-control text-end" formControlName="work_price" [(ngModel)]="itemRef.work_price">
                             <div
                                 *ngIf="(EditForm.controls['work_price'].hasError('pattern') && (EditForm.get('work_price')?.dirty || EditForm.get('work_price')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i>

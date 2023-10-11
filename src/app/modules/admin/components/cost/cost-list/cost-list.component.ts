@@ -29,9 +29,11 @@ export class CostListComponent implements OnInit {
   public modalRef!: BsModalRef;
   public itemRef: any = null;
   public isProcess: boolean = false;
-  public idRef: any = null;
+  public idRef: any = null; // id สำหรับ delete
 
-  public loading: boolean = true;
+  public loading: boolean = true; /* แสดง loading */
+  public openFormEdit: boolean = false; /* เปิดปิด ฟอร์มเพิ่ม Cost */
+  public idEditRef: any = null;
 
   public workId: any = this.route.snapshot.paramMap.get('id');
   public token = localStorage.getItem('token');
@@ -48,12 +50,11 @@ export class CostListComponent implements OnInit {
     this.getItems();
   }
 
-  reloadData(){
-    this.getItems();
-  }
-
   async getItems() {
+
     this.loading = true;
+    this.openFormEdit = false;
+
     await this.service.getByWorkId(this.workId).subscribe(
       res => {
         this.itemRef = res;
@@ -100,9 +101,20 @@ export class CostListComponent implements OnInit {
 
   public loadingShow(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
-    console.log(this.loading);
   }
 
+    /* แสดง/ซ่อมฟอร์มแก้ไข */
+    FormEdit(id:any) {
+      this.openFormEdit = true;
+      this.idEditRef = id;
+    }
   
+    reloadData(){
+      this.getItems();
+    }
+
+    EvenFrom_CostEdit_CloseFormEdit(){
+      this.openFormEdit = false;
+    }
 
 }

@@ -109,7 +109,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="inputWorkYear">ระยะทาง (เมตร) </label>
-                            <input type="text" class="form-control" formControlName="work_distance">
+                            <input type="text" class="form-control text-end" formControlName="work_distance">
                             <div
                                 *ngIf="(createForm.controls['work_distance'].hasError('pattern') && (createForm.get('work_distance')?.dirty || createForm.get('work_distance')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputWorkPlace">ราคางาน (บาท) </label>
-                            <input type="text" class="form-control" formControlName="work_price">
+                            <input type="text" class="form-control text-end" formControlName="work_price">
                             <div
                                 *ngIf="(createForm.controls['work_price'].hasError('pattern') && (createForm.get('work_price')?.dirty || createForm.get('work_price')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <input type="hidden" formControlName="token">
+                    <!-- <input type="hidden" formControlName="token"> -->
                     <button type="submit" class="btn btn-primary btn-sm me-1" [disabled]="createForm.invalid"><i
                             class="fa-regular fa-floppy-disk"></i> บันทึก </button>
                     <button class="btn btn-secondary btn-sm " [routerLink]="['/work/status']"><i

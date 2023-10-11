@@ -70,7 +70,8 @@ export class WorkService {
     let thisYear: number = d.getFullYear();
     let year: any = [];
     while (startYear <= thisYear) {
-      year.push({ 'value': startYear++, 'label': startYear++ })
+      startYear++;
+      year.push({ 'value': startYear, 'label': startYear })
     }
     return year;
   }

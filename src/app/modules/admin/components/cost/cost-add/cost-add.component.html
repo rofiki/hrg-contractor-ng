@@ -10,7 +10,13 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="" class="form-label m-0">หมวดค่าใช้จ่าย <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="" formControlName="costtype_id">
+                            <select *ngIf="costType && costType.data" class="form-control" formControlName="costtype_id">
+                                <option value="">- เลือก -</option>
+                                <ng-container *ngFor="let element of costType.data">
+                                    <option value="{{ element.id }}"> {{ element.name }}</option>
+                                </ng-container>
+                            </select> 
+                            <!-- <input type="text" class="form-control" id="" formControlName="costtype_id"> -->
                             <div
                                 *ngIf="(createForm.controls['costtype_id'].hasError('required') && (createForm.get('costtype_id')?.dirty || createForm.get('costtype_id')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i> หมวดค่าใช้จ่าย
@@ -21,7 +27,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="" class="form-label m-0">วันที่ <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="" formControlName="cost_date">
+                            <input type="text" class="form-control" id="" formControlName="cost_date" bsDatepicker>
                             <div
                                 *ngIf="(createForm.controls['cost_date'].hasError('required') && (createForm.get('cost_date')?.dirty || createForm.get('cost_date')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i> วันที่
@@ -40,7 +46,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="" class="form-label m-0">จำนวนเงิน <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="" formControlName="cost_amount">
+                            <input type="text" class="form-control text-end" id="" formControlName="cost_amount">
                             <div
                                 *ngIf="(createForm.controls['cost_amount'].hasError('required') && (createForm.get('cost_amount')?.dirty || createForm.get('cost_amount')?.touched))">
                                 <small class="message-error"><i class="fa-solid fa-square-xmark"></i> จำนวนเงิน
@@ -66,7 +72,6 @@
 <div *ngIf="!openFormCreate;">
     <button class="btn btn-primary btn-sm" (click)="FormCreateCost(true)"><i class="fa-solid fa-plus"></i> เพิ่มค่าใช้จ่าย</button>
 </div>
-
 
 <ng-template #template>
     <div class="modal-body text-center">

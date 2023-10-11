@@ -6,9 +6,10 @@ import { AuthService } from 'src/app/service/auth.service';
 // import { WorkService } from 'src/app/service/work.service';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { JsonPipe } from '@angular/common';
+import { DatePipe, JsonPipe } from '@angular/common';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { CostService } from 'src/app/service/cost.service';
+import { CosttypeService } from 'src/app/service/costtype.service';
 
 @Component({
   selector: 'app-cost-add',
@@ -23,36 +24,41 @@ export class CostAddComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService,
     private service: CostService,
+    private costTypeService: CosttypeService,
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private route: ActivatedRoute,
-  ) {
-    // const id: any = this.route.snapshot.paramMap.get('id');
-  }
+    private datePipe: DatePipe
+  ) { }
 
   public modalRef!: BsModalRef;
   public createForm!: FormGroup;
-  // public token = localStorage.getItem('token');
-  // public workId: any = this.route.snapshot.paramMap.get('id');
+  public numRegex = /^-?\d*[.,]?\d{0,2}$/;
 
   public items: any = null;
   public isProcess: boolean = false;
-  
+
   public openFormCreate: boolean = false; /* เปิดปิด ฟอร์มเพิ่ม Cost */
   @Output() reloadData = new EventEmitter<boolean>(); // ส่ง param เพื่อสั่งให้ cost-list reload
 
-
+  public costType: any = null;
   public workId: any = this.route.snapshot.paramMap.get('id');
   public token = localStorage.getItem('token');
 
-  ngOnInit():void {
+  ngOnInit(): void {
 
     this.createForm = this.fb.group({
       costtype_id: this.fb.control('', [Validators.required]),
       cost_date: this.fb.control('', [Validators.required]),
       cost_detail: this.fb.control(null, []),
-      cost_amount: this.fb.control('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+      cost_amount: this.fb.control(0, [Validators.required, Validators.pattern(this.numRegex)]),
     });
+
+    this.costTypeService.getAll({ start: 0, limit: 100 }).subscribe(cus => {
+      this.costType = cus;
+    });
+
+    this.localeService.use('th'); // set ปฏิทินเป็น th
 
   }
 
@@ -61,10 +67,16 @@ export class CostAddComponent implements OnInit {
   }
 
   async confirm() {
+
     let params = this.createForm.value;
+    this.isProcess = true;
+
     params.work_id = this.workId;
     params.token = this.token;
-    this.isProcess = true;
+
+    // แปลง date format ก่อน update
+    params.cost_date = this.datePipe.transform(params.cost_date, 'yyyy-MM-dd hh:mm:ss');
+
     await this.service.create(params).subscribe(res => {
 
       if (res.status) {
@@ -76,11 +88,11 @@ export class CostAddComponent implements OnInit {
         this.isProcess = false;
       } else {
         this.modalRef.hide();
-        this.toastr.error('เพิ่มข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+        this.toastr.error(res.message);
         this.createForm.reset();
         this.isProcess = false;
       }
-      console.log(res);
+      // console.log(res);
     });
 
   }
@@ -89,9 +101,9 @@ export class CostAddComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  FormCreateCost (value:boolean){
+  /* แสดง/ซ่อมฟอร์มเพิ่ม */
+  FormCreateCost(value: boolean) {
     this.openFormCreate = value;
-    // console.log(value)
   }
 
 }
