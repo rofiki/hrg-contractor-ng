@@ -12,7 +12,6 @@
             <div class="col-md-12 mb-2">
                 <div class="btn-group" dropdown>
                     <a class="btn btn-secondary btn-sm" type="button" [routerLink]="['/work/status']"><i class="fa-solid fa-arrow-left"></i> กลับ</a>
-                    <a class="btn btn-primary btn-sm" type="button">บันทึกรายจ่าย</a>
                     <a class="btn btn-primary btn-sm" type="button">อับโหลดรูป</a>
                     <a class="btn btn-primary btn-sm" type="button">ปิดงาน/ออกใบเสร็จ</a>
                     <button id="button-animated" dropdownToggle type="button"
@@ -110,14 +109,10 @@
                         <i class="fas fa-hand-holding-dollar"></i> ต้นทุน/ค่าใช้จ่าย 
                     </div>
                     <div class="card-body">
-                        <app-cost-list [step]="5"></app-cost-list>
-                        <div *ngIf="openFormCreateCost;">
-                            <app-cost-add></app-cost-add>
-                            <button class="btn btn-danger btn-sm" (click)="FormCreateCost(false)"><i class="fa-solid fa-xmark"></i> ปิดฟอร์ม</button>
-                        </div>
-                        <div *ngIf="!openFormCreateCost;">
-                            <button class="btn btn-primary btn-sm" (click)="FormCreateCost(true)"><i class="fa-solid fa-plus"></i> เพิ่มค่าใช้จ่าย</button>
-                        </div>
+
+                        <app-cost-list 
+                            [getWorkPrice]="itemRef?.work_price">
+                        </app-cost-list>
                         
                     </div>
                 </div>

@@ -123,5 +123,4 @@ export class WorkDetailComponent implements OnInit {
   // btn_back(search: string = '', start: number = 0, limit: number = 10) {
   //   console.log({ search: search, start: start, limit: limit });
   // }
-
 }

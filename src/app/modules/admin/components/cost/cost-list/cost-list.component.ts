@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { map, switchMap } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -34,30 +34,32 @@ export class CostListComponent implements OnInit {
   public loading: boolean = true;
 
   public workId: any = this.route.snapshot.paramMap.get('id');
+  public token = localStorage.getItem('token');
   
 
-  // คำนวณค่าใช้จ่าย
-  public workPrice :number = 0; // ราคางาน
+  /* คำนวณค่าใช้จ่าย */
   public sumCost:number = 0; // รวมค่าใช้จ่าย
   public netProfit:number = 0; // กำไรสุทธิ
 
-@Input() step:number = 1;
-
+  @Input() getWorkPrice:number = 0; // รับค่า work_price จาก work-detail.componant
+  @Input() showListAfterCreate:boolean = false; // reload list หลังจาก เพิ่มข้อมูล
 
   ngOnInit(): void {
     this.getItems();
   }
 
+  reloadData(){
+    this.getItems();
+  }
+
   async getItems() {
+    this.loading = true;
     await this.service.getByWorkId(this.workId).subscribe(
       res => {
-        this.workService.get(this.workId).subscribe(work => {
-          this.workPrice = work[0].work_price;
-        });
-
         this.itemRef = res;
 
         // รวมค่าใช้จ่าย
+        this.sumCost = 0;
         for(let i = 0; i < this.itemRef.data.length; i++){
           this.sumCost += this.itemRef.data[i].cost_amount;
         }
@@ -100,5 +102,7 @@ export class CostListComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     console.log(this.loading);
   }
+
+  
 
 }

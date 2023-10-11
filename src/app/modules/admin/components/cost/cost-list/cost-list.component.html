@@ -11,25 +11,53 @@
         <thead>
             <tr class="">
                 <td><strong>ราคางาน</strong></td>
-                <td class="text-end text-primary "><strong>{{workPrice | number: '1.2-2'}}</strong></td>
+                <td class="text-end text-primary " ><strong>{{getWorkPrice | number: '1.2-2'}}</strong></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of itemRef?.data">
                 <td class="border-right-0 ">{{item.cost_date | date: 'dd/MM/yyyy'}} <small class="text-muted">{{item.name}}</small></td>
                 <td class="text-end text-danger ">{{item.cost_amount | number: '1.2-2'}}</td>
+                <td class="text-secondary ">
+                    <a class="text-muted">
+                        <i class="fa-solid fa-pen p-1"></i>
+                    </a>
+                    <a href="javascript:void(0)" (click)="openModal_delete( template, item.cost_id )" class="text-muted" >
+                        <i class="fa-solid fa-trash p-1"></i>
+                    </a>
+                </td>
             </tr>
             <tr class="">
                 <td><strong>ค่าใช้จ่ายทั้งหมด</strong></td>
                 <td class="text-end text-danger "><strong>{{sumCost | number: '1.2-2'}}</strong></td>
+                <td></td>
             </tr>
             <tr class="">
                 <td><strong>กำไรสุทธิ</strong></td>
-                <td class="text-end text-success "><strong>{{(workPrice-sumCost) | number: '1.2-2'}}</strong></td>
+                <td class="text-end text-success "><strong>{{(getWorkPrice-sumCost) | number: '1.2-2'}}</strong></td>
+                <td></td>
             </tr>
 
         </tbody>
     </table>
 
 </ng-template>
-{{step}}
+<app-cost-add (reloadData)="reloadData()" ></app-cost-add>
+
+<ng-template #template>
+    <div class="modal-body text-center">
+        <p>ยืนยันลบข้อมูล</p>
+
+        <div *ngIf="(isProcess == true) then showSaveLoading"></div>
+        <ng-template #showSaveLoading>
+            <p><i class="fa-solid fa-circle-notch fa-spin"></i> กำลังประมวลผล...</p>
+        </ng-template>
+
+        <button type="button" class="btn btn-danger btn-sm me-1" [disabled]="(isProcess == true)"
+            (click)="confirm(idRef)">ลบ</button>
+        <button type="button" class="btn btn-secondary btn-sm" [disabled]="(isProcess == true)"
+            (click)="decline()">ยกเลิก</button>
+
+    </div>
+</ng-template>
